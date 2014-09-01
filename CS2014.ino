@@ -112,55 +112,40 @@ float Bit2Volt2(int n){
 
 String GetGGA()
 {
-  ermittleGPS = true;
-  String output = "";
-  boolean GGAready = false;
-  boolean start = false;
-  boolean ok = false;
-  int inByte = 0;
-  char inChar;
+	String gps_output = "";
+	boolean GGAready = false;
+	boolean start = false;
+	int inByte = 0;
+	char inChar;
   
-  while (!GGAready) 
-  {
-    if (Serial3.available())
-   { 
-     inChar = Serial3.read();
-     //Serial.print(inChar); //Debug Ausgabe
-     inByte = int(inChar);
-     if (start)
-     {
-       if (inChar!=10 && inChar!=13) output += inChar;
-       if (!ok)
-       {// richtigen Header noch nicht erkannt
-         if (inChar==',')
-         {
-           if (output.equals("$GPGGA,")==true)
-           { //nun richtiger Header da, von nun an, nur doch auf das Ende warten
-             ok = true;
-           } else
-           { // das war dann wohl der falsche Header, also von vorne
-             output = "";
-             start = false;
-           }
-         }
-       } else
-       { // hier kommen wir nur her, wenn Header richtig ist, also auf Ende warten
-         if (inByte==13)
-         {
-           GGAready=true;
-         }
-       }
-     } else
-     { // warten auf 13, 10 im Stream, also Ende der Zeile
-       if (inByte==10) 
-       {
-         start = true;
-       }
-     }// Ende if (start)
-   }// Ende if (available)
- }// Ende while
- ermittleGPS = false;
- return(output); 
+	ermittleGPS = true;
+	while (!GGAready) 
+	{
+		if (Serial3.available())
+		{ 
+			inChar = Serial3.read();
+			//Serial.print(inChar); //Debug Ausgabe
+			inByte = int(inChar);
+			if (start)
+			{
+				if (inByte==13)
+				{ //Abbruch Bedingung erreicht
+					GGAready=true;
+				} else
+				{
+					gps_output += inChar;
+				}
+			} else
+			{ // warten auf 13, 10 im Stream, also Ende der Zeile
+				if (inByte==10) 
+				{
+					start = true;
+				}
+			}// Ende if (start)
+		}// Ende if (available)
+	}// Ende while
+	ermittleGPS = false;
+	return(gps_output); 
 }
 
 /***********************************************************************************
@@ -213,6 +198,9 @@ void setup () {  //voreinstellgungen
 }
 
 
+/***********************************************************************************
+ * LOOP ROUTINE                                                                   *
+ ***********************************************************************************/
 void loop () {  //schleife <3
  
  //Primärmission
