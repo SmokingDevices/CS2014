@@ -9,72 +9,69 @@
 
 #define Bitrate 19200
 
-#define druckPin A6
-#define tempPin A1
-#define tempNTCPin A2
-#define beepPin 5        // digitaler Pin für Beeper
+#define druckPin A0
+#define tempPin A1			// int. Sensor LM35 (3 Beine)
+#define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
+#define beepPin 5			// digitaler D-Pin 5 für Beeper
+#define dustPin A5			// angeschlossen an Pin A5
+#define dustLEDPin 2		// LED an D-Pin 2 angeschlossen
 
 // LM35 Temp sensor
-#define TmpSens 100          //Sensitivity. Deg.Celsius /volt
+#define TmpSens 100			// Sensitivity. Deg.Celsius /volt
 
 // NTC-sensor variables
-#define R1 10000.0            //Value of R1 on the shield
-#define NTC_Grad 18.1699      //The gradiant value for the NTC sensor
-#define NTC_Off 21.0         //The offset value for the NTC sensor
-#define TRENNER "|"
+#define NTC_Grad 18.1699	// The gradiant value for the NTC sensor
+#define NTC_Off 21.0		// The offset value for the NTC sensor
+
+#define TRENNER "|"			// Trennzeichen zwischen den Werten
 
 /***********************************************************************************
  * VARIABLEN                                                                       *
  ***********************************************************************************/
-//Primärmission (1)
 long int letzteSendung = 0;
-int Intervall = 1000;    
+int Intervall = 1000;    // alle wie viel ms wird eine Messung gemacht und gesendet
+
+//Primärmission (1)
+int sensorValue = 0;	// Variable to store the value coming from the sensor
+float druckBoden = 0;
+float druckDurchschnitt = 0;      //Variablen setzen zur späteren Verwendung
+float hoehe = 0;		// aktuelle Hoehe
+float altehoehe=0;		// Hoehe bei der letzten Messung
+float fall= 0;			// aktuelle Fallgeschwindigkeit
 
 boolean ermittleGPS = false; //Wird gerade GPS ermittelt
 
-int pause = 1000;
-int sensorValue = 0;  // variable to store the value coming from the sensor
-float druckBoden = 0;
-float druckDurchschnitt = 0;      //Variablen setzen zur späteren Verwendung
-float hoehe = 0;
-float altehoehe=0;
-float fall= 0;
-
 //Staubsensor (2)
-int dustPin = 5;  //angeschlossen an Pin 6
-int ledPower = 2;  //LED an pin 2 angeschlossen
-int delayTime = 500;  //messzeitabstand
-int delayTime2 = 80;  //zeit in der gemessen wird ?
-float offTime = 9689;  //messpause
-int dustValue = 0;  //???????????????????????(kommt nicht im programm vor, oder? o.0)
-float calcVoltage = 0; //errechnete Voltzahl
-float voltMeasured = 0; //gemessenen Voltzahl im Sensor
-float dustDensity = 0; // letztendliche Staubkonzentration
+int dustValue = 0;		//Wert der vom Dust Sensor kommt 
+float voltage = 0;		//errechnete Voltzahl
+float dustDensity = 0;	// letztendliche Staubkonzentration
+
+//allgemeine Laufvariable
 int i=0;
-float voltage = 0;
-float ppm=0;
+
+//Header fuer die Exceltabelle, wir nur einmal am Anfang gesendet
 String header = "time,Druck,Temp (int), Temp (ext),Hoehe, Fallgeschw.,Staubwert, Staubspannung, Staubdichte, GPS";
 
 /***********************************************************************************
  * FUNKTIONEN                                                                      *
  ***********************************************************************************/
 //Primärmission (1)
-float getPressure (int pin) {  //methode für Druck
+float getPressure (int pin) {  //Methode für Druck
 	float volt = Bit2Volt(pin); //liest pin ein 
-	float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //umrechnung von V zu Pa und dann zu hPa
-	return hPa;  //zurückgeben (an aufrufer)
+	float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
+	return hPa;  //zurueckgeben
 }
 
-float getTemperatureExtern(int pin){  //LM35 an A1
+float getTemperatureIntern(int pin){  //LM35 an A1
 	float volt = Bit2Volt(pin); //liest pin ein
 	float result =volt*TmpSens;  //umrechnung
-	return result;  //zurückgeben (an aufrufer)
+	return result;  //zurueckgeben
 }
 
-float getTemperatureIntern(int pin){
+float getTemperatureExtern(int pin){
 	float volt = Bit2Volt(pin); //liest pin ein
 	float Temp=NTC_Grad*volt-NTC_Off; //umrechnen Volt nach Grad Celcius
-	return Temp; //zurückgeben
+	return Temp; //zurueckgeben
 }
 
 float Bit2Volt(int n){    //Function to convert raw ADC-data (0-255) to volt
@@ -137,14 +134,13 @@ void setup () {  //Voreinstellungen
 	// Serial3.println("$PMTK220,100*2F"); // 10 Hz, ging gut mit Arduino, mit T-Board nicht mehr
 	Serial3.println("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"); // Nur GGA ausgeben
 
-	pinMode (beepPin,OUTPUT);	//LED=verbraucher --> pinmode output
-	pinMode (ledPower,OUTPUT);	//LED=verbraucher --> pinmode output
-	pinMode (dustPin,OUTPUT);	//Staubsensor ist Verbraucher...s.o.
- 
+	pinMode (beepPin,OUTPUT);	//Piepser zum Laerm machen
+	pinMode (dustLEDPin,OUTPUT);//LED des Staubsensor
+
 	//Primärmission
 	float hPa;
 	for (int i = 0; i < 20 ; i++) {    //schleife, 20 mal
-		hPa = getPressure(A0);
+		hPa = getPressure(druckPin);
 		if (800 < hPa &&  1500 > hPa){ 
 		//zum Berechnen des 0-Druckes...sollten unwahrscheinliche Werte gemessen werden, 
 		//sollen diese ignoriert und durch neue ersetzt werden
@@ -170,65 +166,63 @@ void setup () {  //Voreinstellungen
 
 
 /***********************************************************************************
- * LOOP ROUTINE                                                                   *
+ * LOOP ROUTINE                                                                    *
  ***********************************************************************************/
 void loop () {  //Schleife <3
 	if (millis()-letzteSendung >= Intervall) {  //Sendeintervall = 1s
 		letzteSendung = millis();
 		String output = "";  
 		//Primärmission
-		float hPa = getPressure(A0);
+		float hPa = getPressure(druckPin);
 		hoehe = calcAltitude(hPa);
-		fall = (altehoehe - hoehe) / (pause / 1000) ;
+		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
 
 		Serial.print(letzteSendung / 1000); //anzeigen des Zeitcodes
-		Serial.print (TRENNER); //Trennstrich (pipe)
+		Serial.print (TRENNER); 
 		Serial.print(hPa); //anzeigen des Druckwertes
-		Serial.print (TRENNER); //Trennstrich (pipe)
-		Serial.print (getTemperatureExtern(A1));  //anzeigen des Temperaturwertes EXT  LM35
-		Serial.print (TRENNER); //Trennstrich (pipe)
-		Serial.print (getTemperatureIntern(A2)); //anzeigen NTC Temperaturwert INT 
-		Serial.print (TRENNER); //Trennstrich (pipe)
+		Serial.print (TRENNER); 
+		Serial.print (getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes INT  LM35
+		Serial.print (TRENNER); 
+		Serial.print (getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert EXT 
+		Serial.print (TRENNER); 
 		Serial.print (hoehe);
-		Serial.print (TRENNER); //Trennstrich (pipe)
+		Serial.print (TRENNER); 
 		Serial.print (fall);
  
 		Serial1.print(letzteSendung / 1000); //anzeigen des Zeitcodes
-		Serial1.print (TRENNER); //Trennstrich (pipe)
+		Serial1.print (TRENNER); 
 		Serial1.print(hPa); //anzeigen des Druckwertes
-		Serial1.print (TRENNER); //Trennstrich (pipe)
-		Serial1.print (getTemperatureExtern(A1));  //anzeigen des Temperaturwertes
-		Serial1.print (TRENNER); //Trennstrich (pipe)
-		Serial1.print (getTemperatureIntern(A2)); //anzeigen NTC Temperaturwert
-		Serial1.print (TRENNER); //Trennstrich (pipe)
+		Serial1.print (TRENNER); 
+		Serial1.print (getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes
+		Serial1.print (TRENNER); 
+		Serial1.print (getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert
+		Serial1.print (TRENNER); 
 		Serial1.print (hoehe);      //Höhenangabe
-		Serial1.print (TRENNER); //Trennstrich (pipe)
-		Serial1.print (fall);      //Höhenangabe
+		Serial1.print (TRENNER); 
+		Serial1.print (fall);      // Fallgeschwindigkeit
    
-    
 		//Staubsensor
-		digitalWrite (ledPower, LOW);    //LED anschalten
+		digitalWrite(dustLEDPin, LOW);    //LED anschalten
 		delayMicroseconds (280);
-		dustValue=analogRead (dustPin);    //Staubsensor auslesen
+		dustValue=analogRead(dustPin);    //Staubsensor auslesen
 		delayMicroseconds (40);
-		digitalWrite (ledPower, HIGH);    //LED ausschalten
+		digitalWrite(dustLEDPin, HIGH);    //LED ausschalten
    
 		delayMicroseconds (9680);			// Abklingen, vermutlich nicht nötig
  
-		voltage = dustValue *0.0048875;    //umrechnen der ausgelesenen Daten zu Volt
+		voltage = dustValue *0.0048875;    //umrechnen der ausgelesenen Daten zu Volt !!! 5/1023!!!
 		// dustDensity = 0.17*voltage-0.1;
 		dustDensity = voltage/5;
 
-
-		Serial.print (TRENNER); //Trennstrich (pipe)
+		Serial.print (TRENNER); 
 		Serial.print(dustValue);  //darstellen von gemessener voltzahl
 		Serial.print (TRENNER);
 		Serial.print(voltage);  //- errechneter voltzahl
 		Serial.print (TRENNER);
 		Serial.print(dustDensity);  //- letztendliche staubkonzentration
     
-		Serial1.print (TRENNER); //Trennstrich (pipe)
+		Serial1.print (TRENNER); 
 		Serial1.print(dustValue);  //darstellen von gemessener voltzahl
 		Serial1.print (TRENNER);
 		Serial1.print(voltage);  //- errechneter voltzahl
