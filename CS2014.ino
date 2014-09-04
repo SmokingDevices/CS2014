@@ -13,7 +13,7 @@
 #define tempPin A1			// int. Sensor LM35 (3 Beine)
 #define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
 #define beepPin 5			// digitaler D-Pin 5 für Beeper
-#define dustPin A5			// angeschlossen an Pin A5
+#define dustPin A9			// angeschlossen an Pin A5
 #define dustLEDPin 2		// LED an D-Pin 2 angeschlossen
 
 // LM35 Temp sensor
@@ -87,6 +87,14 @@ float calcAltitude(float pressure){    //rechne hoehe
 	C = 1 - C;              
 	C = C /0.0000225577;
 	return C;
+}
+
+String floatToString(float number){
+  String stringNumber = "";
+  char tempChar[10]; 
+  dtostrf(number, 4, 2, tempChar);
+  stringNumber += tempChar;
+  return stringNumber;
 }
 
 String GetGGA() {
@@ -178,30 +186,18 @@ void loop () {  //Schleife <3
 		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
 
-		Serial.print(letzteSendung / 1000); //anzeigen des Zeitcodes
-		Serial.print (TRENNER); 
-		Serial.print(hPa); //anzeigen des Druckwertes
-		Serial.print (TRENNER); 
-		Serial.print (getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes INT  LM35
-		Serial.print (TRENNER); 
-		Serial.print (getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert EXT 
-		Serial.print (TRENNER); 
-		Serial.print (hoehe);
-		Serial.print (TRENNER); 
-		Serial.print (fall);
- 
-		Serial1.print(letzteSendung / 1000); //anzeigen des Zeitcodes
-		Serial1.print (TRENNER); 
-		Serial1.print(hPa); //anzeigen des Druckwertes
-		Serial1.print (TRENNER); 
-		Serial1.print (getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes
-		Serial1.print (TRENNER); 
-		Serial1.print (getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert
-		Serial1.print (TRENNER); 
-		Serial1.print (hoehe);      //Höhenangabe
-		Serial1.print (TRENNER); 
-		Serial1.print (fall);      // Fallgeschwindigkeit
-   
+		output += (String)(letzteSendung / 1000); //anzeigen des Zeitcodes
+		output += TRENNER; 
+		output += floatToString(hPa); //anzeigen des Druckwertes
+		output += TRENNER; 
+		output += floatToString(getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes INT  LM35
+		output += TRENNER; 
+		output += floatToString(getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert EXT 
+		output += TRENNER; 
+		output += floatToString(hoehe);
+		output += TRENNER; 
+		output += floatToString(fall);
+
 		//Staubsensor
 		digitalWrite(dustLEDPin, LOW);    //LED anschalten
 		delayMicroseconds (280);
@@ -215,44 +211,32 @@ void loop () {  //Schleife <3
 		// dustDensity = 0.17*voltage-0.1;
 		dustDensity = voltage/5;
 
-		Serial.print (TRENNER); 
-		Serial.print(dustValue);  //darstellen von gemessener voltzahl
-		Serial.print (TRENNER);
-		Serial.print(voltage);  //- errechneter voltzahl
-		Serial.print (TRENNER);
-		Serial.print(dustDensity);  //- letztendliche staubkonzentration
-    
-		Serial1.print (TRENNER); 
-		Serial1.print(dustValue);  //darstellen von gemessener voltzahl
-		Serial1.print (TRENNER);
-		Serial1.print(voltage);  //- errechneter voltzahl
-		Serial1.print (TRENNER);
-		Serial1.print(dustDensity);  //- letztendliche staubkonzentration
- 
+		output += TRENNER; 
+		output += (String)(dustValue);  //darstellen von gemessener voltzahl
+		output += TRENNER; 
+		output += floatToString(voltage);  //- errechneter voltzahl
+		output += TRENNER; 
+		output += floatToString(dustDensity);//- letztendliche staubkonzentration
 
 		//GPS
 		String temp = "";
 		if (!ermittleGPS) {
 			temp = GetGGA();
 			if (!temp.equals("")) {
-				Serial.print(TRENNER);
-				Serial.print(temp);  
-				Serial1.print(TRENNER);
-				Serial1.print(temp);  
-			}
+                		output += TRENNER; 
+		                output += temp;
+                		output += TRENNER; 
+              		}
 		}
-		/*
+		
 		if (debug == 1) {
 			Serial.println(output);
 		}
 		Serial1.println(output);
-		*/
-		Serial.println(TRENNER);
-		Serial1.println (TRENNER);
-
+		
 		// Test Beeper
-		digitalWrite (beepPin, HIGH);
-		delay(10);
-		digitalWrite(beepPin,LOW);
+		//digitalWrite (beepPin, HIGH);
+		//delay(10);
+		//digitalWrite(beepPin,LOW);
   } // Ende im Sekundentakt Senden
 } // Ende Loop
