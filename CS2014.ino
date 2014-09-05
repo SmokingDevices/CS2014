@@ -50,7 +50,7 @@ float dustDensity = 0;	// letztendliche Staubkonzentration
 int i=0;
 
 //Header fuer die Exceltabelle, wir nur einmal am Anfang gesendet
-String header = "time,Druck,Temp (int), Temp (ext),Hoehe, Fallgeschw.,Staubwert, Staubspannung, Staubdichte, GPS";
+String header = "time,Druck,Temp (int),Temp (ext),Hoehe,Fallgeschw.,Staubwert,Staubspannung,Staubdichte,GPS Header,Uhrzeit,Latitude,N/S,Longitude,E/W,Position,Satelliten,HDOP,MSL Hoehe,M,Geoid Hoehe,M,Age of Diff,Checksumme";
 
 /***********************************************************************************
  * FUNKTIONEN                                                                      *
@@ -59,28 +59,28 @@ String header = "time,Druck,Temp (int), Temp (ext),Hoehe, Fallgeschw.,Staubwert,
 float getPressure (int pin) {  //Methode für Druck
 	float volt = Bit2Volt(pin); //liest pin ein 
 	float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
-	return hPa;  //zurueckgeben
+	return hPa;  // zurueckgeben
 }
 
 float getTemperatureIntern(int pin){  //LM35 an A1
 	float volt = Bit2Volt(pin); //liest pin ein
 	float result =volt*TmpSens;  //umrechnung
-	return result;  //zurueckgeben
+	return result;  // zurueckgeben
 }
 
 float getTemperatureExtern(int pin){
-	float volt = Bit2Volt(pin); //liest pin ein
-	float Temp=NTC_Grad*volt-NTC_Off; //umrechnen Volt nach Grad Celcius
-	return Temp; //zurueckgeben
+	float volt = Bit2Volt(pin); // liest pin ein
+	float Temp=NTC_Grad*volt-NTC_Off; // umrechnen Volt nach Grad Celcius
+	return Temp; // zurueckgeben
 }
 
-float Bit2Volt(int n){    //Function to convert raw ADC-data (0-255) to volt
-	int raw = analogRead(n);  //messdaten von pin 'n' lesen
-	float volt = (float)raw*5.000/1024;  //umrechnung für volt
-	return volt;  //zurückgeben der Voltzahl
+float Bit2Volt(int n){    // Funktion zum Lesen und umwandeln
+	int raw = analogRead(n);  // Messdaten von pin 'n' lesen
+	float volt = (float)raw*5.000/1024;  // Umrechnung für Volt
+	return volt;  // zurückgeben der Voltzahl
 }
 
-float calcAltitude(float pressure){    //rechne hoehe
+float calcAltitude(float pressure){    // rechne Hoehe
 	float A = pressure/druckDurchschnitt; // Gemessenner Druck /Druckdurchschnitt
 	float B = 1/5.25588;    // B als Konstante einsetzten (aus Datenbank)
 	float C = pow(A,B);    // Logarithmus von A und B
@@ -90,11 +90,11 @@ float calcAltitude(float pressure){    //rechne hoehe
 }
 
 String floatToString(float number){
-  String stringNumber = "";
-  char tempChar[10]; 
-  dtostrf(number, 4, 2, tempChar);
-  stringNumber += tempChar;
-  return stringNumber;
+	String stringNumber = "";
+	char tempChar[10]; 
+	dtostrf(number, 4, 2, tempChar);
+	stringNumber += tempChar;
+	return stringNumber;
 }
 
 String GetGGA() {
@@ -109,16 +109,16 @@ String GetGGA() {
 		if (Serial3.available()) { 
 			inChar = Serial3.read();
 			inByte = int(inChar);
-			//Serial.print(inChar); //Debug Ausgabe
-			//Serial.print(inByte); //Debug Ausgabe
-			//Serial.print(", "); //Debug Ausgabe
+			//Serial.print(inChar);	// Debug Ausgabe
+			//Serial.print(inByte);	// Debug Ausgabe
+			//Serial.print(", ");	// Debug Ausgabe
 			if (start) {
-				if (inByte==13) { //Abbruch Bedingung erreicht
+				if (inByte==13) { // Abbruch Bedingung erreicht
 					GGAready=true;
 				} else {
 					gps_output += inChar;
 				}
-			} else { // warten auf 13, 10 im Stream, also Ende der Zeile
+			} else { // warten auf 10 im Stream, also Ende der Zeile
 				if (inByte==10) {
 					start = true;
 				}
@@ -134,20 +134,20 @@ String GetGGA() {
  ***********************************************************************************/
 void setup () {  //Voreinstellungen
 	if (debug == 1) {
-		Serial.begin(Bitrate);  //datenblocks pro sekunde
+		Serial.begin(Bitrate);
 	}
-	Serial1.begin(Bitrate); // initialize serial communication at 19200 bits per second:
+	Serial1.begin(Bitrate); 	// Initialisiere das Sendmodul (19200 bits per second):
 
-	Serial3.begin(9600);  // init GPS an Serial2
+	Serial3.begin(9600);  					// init GPS an Serial2
 	// Serial3.println("$PMTK220,100*2F"); // 10 Hz, ging gut mit Arduino, mit T-Board nicht mehr
 	Serial3.println("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"); // Nur GGA ausgeben
 
-	pinMode (beepPin,OUTPUT);	//Piepser zum Laerm machen
-	pinMode (dustLEDPin,OUTPUT);//LED des Staubsensor
+	pinMode (beepPin,OUTPUT);				// Piepser zum Laerm machen
+	pinMode (dustLEDPin,OUTPUT);			// LED des Staubsensor
 
 	//Primärmission
 	float hPa;
-	for (int i = 0; i < 20 ; i++) {    //schleife, 20 mal
+	for (int i = 0; i < 20 ; i++) {			// Schleife, 20 mal
 		hPa = getPressure(druckPin);
 		if (800 < hPa &&  1500 > hPa){ 
 		//zum Berechnen des 0-Druckes...sollten unwahrscheinliche Werte gemessen werden, 
@@ -157,10 +157,10 @@ void setup () {  //Voreinstellungen
 			i--;
 		} 
 	}
-	druckDurchschnitt = druckBoden/20;      //Berechnung des Druckdurchschnittes
+	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
 	if (debug == 1) {
-		//Serial.println ("h:"+hoehe);      //debugging
+		//Serial.println ("h:"+hoehe);      // debugging
 		Serial.print ("hPa:");
 		Serial.println (hPa);
 		Serial.print ("druckDurchschnitt:");
@@ -180,53 +180,54 @@ void loop () {  //Schleife <3
 	if (millis()-letzteSendung >= Intervall) {  //Sendeintervall = 1s
 		letzteSendung = millis();
 		String output = "";  
-		//Primärmission
+
+		// ******************* PRIMÄRMISSION ************************
 		float hPa = getPressure(druckPin);
 		hoehe = calcAltitude(hPa);
 		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
 
-		output += (String)(letzteSendung / 1000); //anzeigen des Zeitcodes
+		output += (String)(letzteSendung / 1000);	// Anzeigen des Zeitcodes
 		output += TRENNER; 
-		output += floatToString(hPa); //anzeigen des Druckwertes
+		output += floatToString(hPa); 				// Anzeigen des Druckwertes
 		output += TRENNER; 
-		output += floatToString(getTemperatureIntern(tempPin));  //anzeigen des Temperaturwertes INT  LM35
+		output += floatToString(getTemperatureIntern(tempPin));  	// Anzeigen des Temperaturwertes INT  LM35
 		output += TRENNER; 
-		output += floatToString(getTemperatureExtern(tempNTCPin)); //anzeigen NTC Temperaturwert EXT 
+		output += floatToString(getTemperatureExtern(tempNTCPin));	//Anzeigen NTC Temperaturwert EXT 
 		output += TRENNER; 
 		output += floatToString(hoehe);
 		output += TRENNER; 
 		output += floatToString(fall);
 
-		//Staubsensor
-		digitalWrite(dustLEDPin, LOW);    //LED anschalten
+		// ******************* STAUBSENSOR ************************
+		digitalWrite(dustLEDPin, LOW);			// LED anschalten
 		delayMicroseconds (280);
-		dustValue=analogRead(dustPin);    //Staubsensor auslesen
+		dustValue=analogRead(dustPin);			// Staubsensor auslesen
 		delayMicroseconds (40);
-		digitalWrite(dustLEDPin, HIGH);    //LED ausschalten
+		digitalWrite(dustLEDPin, HIGH);			// LED ausschalten
    
-		delayMicroseconds (9680);			// Abklingen, vermutlich nicht nötig
+		delayMicroseconds (9680);				// Abklingen, vermutlich nicht nötig
  
-		voltage = dustValue *0.0048875;    //umrechnen der ausgelesenen Daten zu Volt !!! 5/1023!!!
+		voltage = dustValue *0.0048875;			// umrechnen der ausgelesenen Daten zu Volt !!! 5/1023!!!
 		// dustDensity = 0.17*voltage-0.1;
 		dustDensity = voltage/5;
 
 		output += TRENNER; 
-		output += (String)(dustValue);  //darstellen von gemessener voltzahl
+		output += (String)(dustValue);			// Darstellen von gemessener Voltzahl
 		output += TRENNER; 
-		output += floatToString(voltage);  //- errechneter voltzahl
+		output += floatToString(voltage);		// errechneter Voltzahl
 		output += TRENNER; 
-		output += floatToString(dustDensity);//- letztendliche staubkonzentration
+		output += floatToString(dustDensity);	// letztendliche Staubkonzentration
 
-		//GPS
+		// ********************* GPS *****************************
 		String temp = "";
 		if (!ermittleGPS) {
 			temp = GetGGA();
 			if (!temp.equals("")) {
-                		output += TRENNER; 
-		                output += temp;
-                		output += TRENNER; 
-              		}
+				output += TRENNER; 
+				output += temp;
+				output += TRENNER; 
+			}
 		}
 		
 		if (debug == 1) {
