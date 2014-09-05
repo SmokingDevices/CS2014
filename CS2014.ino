@@ -34,17 +34,21 @@ int Intervall = 1000;    // alle wie viel ms wird eine Messung gemacht und gesen
 //Primärmission (1)
 int sensorValue = 0;	// Variable to store the value coming from the sensor
 float druckBoden = 0;
-float druckDurchschnitt = 0;      //Variablen setzen zur späteren Verwendung
+float druckDurchschnitt = 0;      // Variablen setzen zur späteren Verwendung
 float hoehe = 0;		// aktuelle Hoehe
 float altehoehe=0;		// Hoehe bei der letzten Messung
 float fall= 0;			// aktuelle Fallgeschwindigkeit
 
 boolean ermittleGPS = false; //Wird gerade GPS ermittelt
 
-//Staubsensor (2)
-int dustValue = 0;		//Wert der vom Dust Sensor kommt 
-float voltage = 0;		//errechnete Voltzahl
+// Staubsensor (2)
+int dustValue = 0;		// Wert der vom Dust Sensor kommt 
+float voltage = 0;		// errechnete Voltzahl
 float dustDensity = 0;	// letztendliche Staubkonzentration
+
+// Pieper einschalten
+boolean steige   = false;
+boolean unter150 = false;
 
 //allgemeine Laufvariable
 int i=0;
@@ -186,6 +190,15 @@ void loop () {  //Schleife <3
 		hoehe = calcAltitude(hPa);
 		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
+		
+		// Steigt die Rakete
+		if (steige==false && hoehe>150){
+			steige = true;
+		}
+		// Fällt der CanSat, unter 150m soll der Piepser dann anfangen.
+		if (unter150 == false && steige==true && hoehe<150){
+			unter150 = true;
+		}
 
 		output += (String)(letzteSendung / 1000);	// Anzeigen des Zeitcodes
 		output += TRENNER; 
@@ -235,9 +248,12 @@ void loop () {  //Schleife <3
 		}
 		Serial1.println(output);
 		
-		// Test Beeper
-		//digitalWrite (beepPin, HIGH);
-		//delay(10);
-		//digitalWrite(beepPin,LOW);
-  } // Ende im Sekundentakt Senden
+	} // Ende im Sekundentakt Senden
+	
+	if (unter150){ // ab 150m soll der Pieper sich bemerkbar machen.
+	// Test Beeper
+		digitalWrite (beepPin, HIGH);
+		delay(100);
+		digitalWrite(beepPin,LOW);
+	}
 } // Ende Loop
