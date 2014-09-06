@@ -11,7 +11,7 @@
 #define tempPin A1			// int. Sensor LM35 (3 Beine)
 #define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
 #define beepPin 5			// digitaler D-Pin 5 für Beeper
-#define dustPin A8			// angeschlossen an Pin A5
+#define dustPin A8			// angeschlossen an Pin A8
 #define dustLEDPin 2		// LED an D-Pin 2 angeschlossen
 
 // LM35 Temp sensor
