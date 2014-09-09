@@ -21,7 +21,7 @@
 #define NTC_Grad 18.1699	// The gradiant value for the NTC sensor
 #define NTC_Off 21.0		// The offset value for the NTC sensor
 
-#define TRENNER "|"			// Trennzeichen zwischen den Werten
+#define TRENNER ","			// Trennzeichen zwischen den Werten
 
 /***********************************************************************************
  * VARIABLEN                                                                       *
