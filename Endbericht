@@ -1,0 +1,501 @@
+
+
+
+Endbericht
+CanSat 2014
+
+
+
+
+
+Teamname: 	spaceclub_berlin 	
+
+Bundesland:	Berlin
+
+ 
+Inhaltsverzeichnis
+1.	Einleitung
+1.1	Teamorganisation und Aufgabenverteilung
+1.2	 Missionsziele
+2.	Beschreibung des CanSat
+2.1	Missionsablauf
+2.2	Mechanisches- und Strukturdesign
+2.3	Elektrische Konstruktion
+2.4	Technische Anforderungen
+3.	Projektdurchführung
+3.1	Einschätzung der Mittel
+3.1.1	Budget
+3.1.2	Externe Unterstützung			
+4.	Primäre Mission
+4.1	Missionsziele
+4.2	Software
+4.3	Dafür benutzte Sensoren bzw. Geräte
+4.4	Ergebnisse
+4.4.1	Temperatursensor
+4.4.2	Drucksensor
+5.	Sekundäre Mission
+5.1	Missionsziele
+5.2	Software
+5.3	Dafür benutzte Sensoren bzw. Geräte
+5.4	Ergebnisse
+5.4.1	Staubsensor
+5.4.2	Kamera mit JPEG-Trigger	6.	Bergungssystem
+6.1	Pieper
+6.2	GPS
+6.3	Bodenstation
+6.3.1	Yagi-Antenne
+7.	Fertige Software
+8.	Problembehandlung
+9.	Öffentlichkeitsarbeit
+10.	Reflexion des Wettbewerbs
+
+1.	Einleitung
+
+
+
+Unser Team setzt sich aus 3 Mädchen und 2 Jungen zusammen, die sich durch das orbitall in Berlin und den spaceclub_berlin  kennen. Durch gemeinsame Projekte im spaceclub_berlin, aber auch in den  Spacecamps 2012 und 2013 oder auch Jugend-forscht, sind wir ein eingespieltes Team geworden.  Betreut und unterstützt werden wir von Mitarbeitern des orbitall und erfahrenen Programmierern.
+Das Projekt hat uns durch einen Vortrag von Frau Remeikis besonders angezogen. Sie hat uns im spaceclub_berlin detailliert über die Anforderungen des Wettbewerbes informiert und uns dazu  animiert, selber daran teilzunehmen. Motiviert uns zu präsentieren und uns neuen Herausforderungen zu stellen, haben wir uns in einem Team von 5 Mitgliedern zusammengefunden.  Bei  unseren spaceclub-Treffen haben wir uns erstmals an das Thema herangeschlichen und uns beraten, wie wir herangehen wollen. Als nächstes haben wir Mitarbeiter gefragt, unsere Betreuer und Lehrkräfte zu sein und uns über die Technologie des CanSat zu unterrichten. Einige unserer jetzigen Betreuer haben ihre Hilfe zudem selbst angeboten zum Beispiel im Gebiet des Programmierens. Zu den Weiteren Treffen haben wir uns Ziele gesetzt, die wir erreichen wollen, haben uns weitergebildet und gelernt, letztendlich die Komponenten programmiert, konstruiert und zusammengeführt. 
+Natürlich haben sich während der Zeit viele Probleme aufgetan, die uns viel Zeit gekostet haben. Nichtsdestotrotz haben wir weiter gearbeitet und sind mit Hilfe unserer Betreuer weiter gekommen.  Problemszenarien haben wir durchgespielt und sicher gestellt, dass  den Start und die Startvorbereitung erfolgreich von statten geht.
+Während der Erarbeitung haben wir viel Material gesammelt und uns mit Experten ausgetauscht. Außerdem wurden wir mit dem Bereich des Programmierens bekannt gemacht und haben die Konstruktion geplant und ausgeführt. Alles mit dem Hintergedanken den Flug erfolgreich durchführen zu können und möglichst wenig Materialschäden davon zu tragen.
+Der Wettbewerb startete für  uns im April 2014 und endet im Oktober 2014 mit dem Start der Rakete und dem Fall des CanSats. 
+Die Besonderheit unseres CanSats ist die Komplexität der Systeme,  die Sekundärmission und unsere Konstruktion. Wir haben nur wenige Komponenten unverändert gelassen und haben somit an viel Platz und Gewicht gespart. 
+1.1	Teamorganisation und Aufgabenverteilung
+
+NO	Name	Position
+T1	Christina Nadolsky	Teamleitung; Bau des CanSat; Datengewinnung, Softwareentwicklung
+T2	Yuna Reinhardt	Dokumentation; Kontrolle der Einhaltung der Wettbewerbsbedingungen; Leitung der Testverfahren, Softwareentwicklung
+T3	Adrian Melinat	Fallschirm; Abpufferung des CanSats bei der Landung
+T6	Nana Reinhardt	Bau des CanSat; Datengewinnung, Grafik, Softwareentwicklung
+T5	Christian Staudigl	Entwicklung der Software, Innere Anordnung der Komponenten
+Bt1	Sylvia Reinhardt	Betreuer 
+Bt2	Werner Bachmann	Betreuer, Unterstützung bei der Fallschirmkonstruktion
+Bt3	Steffen Janke	Berater für die Entwicklung der Software, innere Anordnung der Komponenten
+Bt4	Jan Klug	Ausbilder für Softwareentwicklung
+H1	Uwe Lathan	Technischer Berater
+H2	Jörg Briesemeister	Beratung bei der Konstruktion
+
+T= Teammitglied
+Bt= Betreuer
+H= Helfer
+1.2	Missionsziele
+Der CanSat-Wettbewerb stellt zur Aufgabe den Bau, Programmierung und Entwicklung eines Nanosatelliten. Dieser soll zwei Missionen erfüllen, zum Einen die vorgegebene Primärmission und zum Anderen die selbst wählbare Sekundärmission. Der Satellit wird mit Hilfe einer Rakete auf einen Kilometer   Höhe gebracht  und der CanSat wird von dieser getrennt und fällt zurück auf den Boden.
+ Bei der Primären Mission ist es unsere Aufgabe, die Temperatur und den Druck zu messen. Das werden wir mit zwei unterschiedlichen Sensoren tun (siehe dazu 4.2). Wenn wir die Daten der Temperatur in Höhe  von einem Kilometer erhalten haben, werden wir daraus ein Temperaturprofil erstellen. Daraus können wir dann ablesen, wie sehr die Temperaturen in dieser Höhe sich mit denen auf dem Boden unterscheidet und wie sehr sie abfällt / schwankt. 
+In unserer Sekundären Mission werden wir die Staubkonzentration in der Luft messen. Wir bauen einen Sensor für Ermittlung der Staubkonzentration in der Atmosphäre ein, um diese in Abhängigkeit von der Flugrichtung und Flughöhe zu ermitteln. Gleichzeitig werden wir mit einer Kamera Fotos von dem überflogenen Ort machen, so dass wir die gemessene Staubkonzentration dem Ort (Fabrik, Wald, Autobahn...) zuordnen können. Um die aktuellen Messpunkte noch weiter zu belegen, werden auch die Lagedaten des Satelliten über GPS erfasst. Dies hilft uns auch, den Satelliten zu bergen.
+
+
+
+
+
+Bild: unser erster Missionsplan für den CanSat
+2.	Beschreibung des CanSat
+2.1	Missionsablauf
+
+Drucksensor (innen)
+
+Temperatursensor (innen)
+
+Temperatursensor (außen)		Mikrokontroller		Sender
+
+Staubsensor (außen)         
+Speichermedium JPEG Trigger	
+GPS (innen)
+Kamera (außen)				   Bodenstation mit Yagi-Antenne
+Pieper (innen)
+
+
+
+Die Mission wird folgendermaßen ablaufen:
+
+Vor dem Start überprüfen wir die Sensoren, ob sie  funktionstüchtig sind. Wir werden sie außerdem kalibrieren und die entsprechende Sendefrequenz mit Hilfe des vorgegebenen Programms einstellen. Dann werden wir den Fallschirm überprüfen, ob er beim Transport oder ähnlichem beschädigt wurde und ob er nicht richtig in Position liegt. Sollte dies der Fall sein, wird er ausgetauscht oder richtig positioniert.
+Die Notwendigkeit dieser Vorkehrungen beruht auf der Komplexität des CanSat. Da alle Komponenten miteinander in Verbindung stehen, kann der Ausfall einer Komponente zu einem Ausfall fast aller führen. Zum Beispiel wenn die Akkus ausfallen oder auf dem Mikrokontroller ein Kurzschluss entsteht. Wir haben aber sichergestellt, dass sich die Komponenten nicht während des Fluges verändern, sie sind also gepolstert und gesichert. 
+Wichtig ist, dass wir zuerst den Empfänger starten und dann den Mikrokontroller, da wir am Anfang der Datenübertragung eine relevante Kopfzeile bekommen.
+
+Der Start des CanSat wird mit einer vorgegebenen Rakete ermöglicht. Der Satellit wird in der Rakete angebracht, der Schalter an der Oberseite des CanSat wird betätigt und er beginnt zu Piepen und zu Senden. Nach 1000 km wird der CanSat von der Rakete gelöst und der Fallschirm geht auf. Nun sinkt er mit einer Fallgeschwindigkeit von 15 Meter pro Sekunde zu Boden. Währenddessen werden die Daten an die Bodenstation gesendet und dort mit einer Yagi-Antenne empfangen.  Die Kamera speichert über einen JPEG-Trigger die Bilder auf einer SD-Karte. 
+
+Die empfangenen GPS-Daten können dann zur Ermittlung der Landestelle genutzt werden, wenn sie sich also über einen längeren Zeitraum nicht mehr ändern und die Höhe des Drucksensors nicht variiert, können wir uns auf die Suche machen. Dabei hilft uns ein zweites GPS-Gerät, das mit der Bodenstation verbunden ist. Erkennbar ist der Fallschirm und das glitzernde Wimpel durch grelle Farben und zusätzlich gibt ein Pieper einen Ton von sich. 
+
+Die SD-Karte wird nun entnommen und die darauf gespeicherten Textdateien in Bilder umformatiert. Nun können wir zu den auswertbaren Daten der Sensoren auch Bilder der Umgebung zufügen. Letztendlich stellen wir die Auswertung unserer Ergebnisse in einer Präsentation vor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.2	Mechanisches- und Strukturdesign
+	ERLÄUTERUNGEN
+ 
+Bild: Platinen und Akku zwischen Mikrokontroller und Sender
+2.3	Elektrische Konstruktion
+
+NO	Sensor	Bauteilbezeichnung	Energie
+pM1	Temperaturmessung im CanSat	LM35DZ	10 mA
+pM2	Temperaturmessung außerhalb des CanSat	NTC
+LE100E3103JB	NTC: Variable, da Widerstand
+pM3	Drucksensor	MPX4115	0.2 to 10 mA
+sM1	Staubmessung außerhalb des CanSat	Sharp GP2Y1010AU0F	mAX. 20 mA
+sM2	Kamera 	LinkSprite JPEG Color Kamera (seriell)	10-100 mA
+sM2a	Speichermöglichkeit der Bilder	JPEG Trigger	3,3-5V 
+bM	Pieper	2 Opes 3V pie200	35 mA
+bM	GPS	GTP A013	25 mA
+Energieversorgung	Akku	Lithium Polymer	400 mA*h
+
+
+SCHALTPLAN UND ERLÄUTERUNGEN
+
+
+pM= primäre Mission
+sM= sekundäre Mission
+bM= Bergungsmission
+
+
+2.4	Technische Anforderungen
+
+ID	Anforderung	Grund	Priorität	Verweis	Überprüfungsmethoden und Lösung
+TA1	115 mm Höhe und 66 mm Durchmesser, Zylinder	Wettbewerbs-
+anforderung	Sehr hoch	Grundlegender Aufbau des CanSat	Messen
+
+TA2	Bergungssysteme maximal 45mm an oberer Seite überragen	Wettbewerbs-
+anforderung, sicherer Abwurf	Sehr hoch	Grundlegender Aufbau des CanSat, Bergungssystem	Messen
+TA3	Gewicht: 350 g	Wettbewerbs-
+anforderung	Sehr hoch	Grundlegender Aufbau, Gewichts-orientierung	Wiegen
+TA4	Keine  Geschosse, Feuerwerkskörper, explosive Materialien	Wettbewerbs- anforderung	Sehr hoch	Materialien	Überprüfung der Materialeigenschaften auf mögliche Gefährdung
+TA5	Leicht erreichbare Batterie bzw. Akkus	Wettbewerbs-anforderung	Sehr hoch falls Austausch notwendig	Grundlegender Aufbau des CanSat	Notfalltest
+Können durch Herausnehmen des Innenlebens ohne Probleme ausgetauscht werden
+TA6	Leicht erreichbarer Hauptschalter	Wettbewerbs-anforderungen	Sehr hoch	Grundlegender Aufbau des CanSat	Notfalltest
+Von Oberseite erreichbar
+TA7	Wiederverwendbares Bergungssysteme in Signalfarben, Fallgeschwindigkeit von 15 m/s	Wettbewerbs-anforderungen	Sehr hoch	Grundlegender Aufbau des CanSat, Bergungssysteme	Tests
+Fallschirm in roter bzw. gelber Farbe
+TA8	Kosten von maximal 500 € (davon 200€ für das CanSat-Kit)	Wettbewerbs-anforderungen	Sehr hoch	Materialien	Ausführliche Dokumentation
+s. 3.1.1
+TA9	Luftdruck- und Temperatursensoren	Wettbewerbs-anforderungen	Sehr hoch	Grundlegender Aufbau, Sensoren	Einbau und Überprüfung der Funktionsfähigkeit
+Mit Mikrokontroller sicher verbunden und Funktionsfähigkeit bestätigt
+TA10	Keine Fly-Home- Mission	Wettbewerbs-anforderungen	hoch	Grundlegender Aufbau	Kein Auslegung des CanSat auf diese Missionart
+TA11	Vor Einsatz der Startrakete müssen alle funktionsfähig sein	Wettbewerbs-anforderungen	Sehr hoch		Überprüfung vor dem Start
+Funktionsfähigkeit vor Oktober bereits sichergestellt
+TA12	Fallschirm muss Kraft von 1000 N aushalten	Wettbewerbs-anforderungen	Sehr hoch	Fallschirm	Tests
+TA13	Maximale Flugzeit 120 s	Wettbewerbs-anforderungen	Sehr hoch	Voraussagungen des Flugablaufes	Tests, Berechnungen
+TA14	Glitzernder Wimpel	Wettbewerbs-anforderungen	Sehr hoch	Bergungssystem	Tests
+Anbringung dessen am CanSat
+TA15	Beschleunigung von 20g aushalten	Wettbewerbs-anforderungen	Sehr hoch	Voraussagung des Flugablaufs und Sicherstellung eines günstigen Ablaufs	Belastbarkeitstest
+mit Gewichten
+TA16	Sendequalität durch Außenmaterial nicht beeinflusst	Zur Sicherung guter Daten	Sehr hoch	Grundlegender Aufbau des CanSat	Test
+Sender innerhalb der Hülle und erfolgreiches Senden
+TA17	Sendekabel außen	Zum optimalen Senden der Daten	Sehr hoch	Grundlegender Aufbau des CanSat	Beachtung während des Baus
+TA18	Akustisches Signal	Leichtes wiederfinden des CanSat	Sehr hoch	Bergungssystem	Test
+Anbringung eines Piepers innerhalb des CanSats
+TA19	Speichermöglichkeit (SD-Karte)	Um Bilder/Daten zu Speichern und nicht empfangene Daten zu sichern	hoch	Grundlegender Aufbau des CanSat	Einbringung der SD_Karte in die Tests
+TA20	Leichte Austauschbarkeit der Fallschirme	Um je nach Witterungs-bedingung zu reagieren oder bei Funktionsuntauglichkeit des ersten Fallschirms	hoch	Grundlegender Aufbau des CanSat	Beobachtung während des Baus
+Anbringung und Abmontage des Fallschirms ohne großen Zeitaufwand 
+TA21	GPS	Leichtes Wiederfinden des CanSat	ratsam	Bergungssystem	Tests der Funktionsfähigkeit
+
+ 
+3.	Projektdurchführung
+
+3.1	Einschätzung der Baukomponenten des CanSat
+3.1.1		Physikalische Eigenschaften (Masse, Größe)
+ID	Bestandteil	Masse in g	Größe in mm
+
+B1	Lithium Polymer (2x)	19,0	40,0x30,0x3,0
+B2	Arduino T-Minus1 mit Druck + 2Temperatursensoren	18,0 	
+B3	2 Arduinos aneinander mit Batterieanschluss und Antenne zum Senden 	34,9 	
+B4	Staubsensor Sharp GP2Y1	15,0 	46.0x 30.0x17.6
+
+B5	JPEG Trigger	11,3 	11,0x40,0x60,0
+B6	Kamera JPEG Color Kamera	11,2 	32x32
+B8	Fallschirm        ?mm	 	
+B9	Gehäuse inklusive Befestigungen (Metallstangen)	96,0	115x66
+B10	Glitzernder Wimpel		
+B11	Material zum Schutz           innen
+                                                außen		
+B12	GPS-Sender	50,0	
+
+ERGEBNIS
+
+
+3.1.2	Kosten der verwendeten Komponenten
+
+ID	Bestandteil	Preis in €
+B1	Batterie Alkaline Extreme Power	CanSat-Kit
+B2	Arduino T-Minus1 mit Druck + 2Temperatursensoren	CanSat-Kit
+B3	2 Arduinos aneinander mit Batterieanschluss und Antenne zum Senden 	CanSat-Kit
+B4	Staubsensor Sharp GP2Y1	13,50
+B5	JPEG Trigger	27,06 
+B6	Kamera JPEG Color Kamera	40,53 
+B7	 5 Pin Kabel (von Kamera)	3,0
+B8	Fallschirm 
+	
+B9	Gestell	CanSat-Kit
+Wert 200
+B11	Material zum Schutz
+	Abfall
+B12	GPS-Sender	38,49
+
+ERGEBNIS
+
+3.2	Externe Unterstützung
+
+Die Räumlichkeiten und das Budget  für unser Projekt erhalten wir durch die Kooperation mit dem orbitall_berlin, weil wir bereits in Zusammenarbeit den spaceclub_berlin führen und gestalten. Desweiteren stammen ein Großteil unserer Betreuer aus dem orbitall oder kooperieren anderweitig mit Ihnen. Daher kommt auch das Mitwirken der Sternfreunde im Fez auf ideeller und motivierender Basis und die Verfügbarkeit einer Yagi-Antenne sowie der Beratung zur Montur und Einsatzfähigkeit durch Die Jugendtechnikschule. Während des spacecamps 2014 im orbitall_berlin kamen wir in Verbindung mit der TU Berlin, an der ebenfalls CanSats (Nanosatelliten) gebaut werden. Mit Ihnen setzten wir uns in Verbindung bezüglich der Stromversorgung und Kameratechnik, also ebenfalls eine ideelle Kooperation.  Während des Spacecamps 2014 verwanden wir Senseboxen, die uns die TU Münster zur Verfügung gestellt hatte. Aus der Programmierung dieser erhielten wir viele Anregungen z.B deren Höhenformel war eine besserer Version unserer gegenüber.	
+ 
+
+4.	Primäre Mission
+4.1	Missionsziele
+Bei der Primären Mission ist es unsere Aufgabe, die Temperatur und den Druck zu messen. Das werden wir mit zwei unterschiedlichen Sensoren tun: der NTC und der LM35 (siehe dazu 4.2). Wenn wir die Daten der Temperatur in Höhe von einem Kilometer erhalten haben, werden wir daraus ein Temperaturprofil erstellen. Daraus erkennen wir die Abhängigkeit der Temperatur von der Höhe. Die dazu benötigte Höhe erhalten wir durch eine Rechnung in der Programmierung. Rund alle 8 Meter verändert sich der Druck um 1 Hektopascal, daher rechnen wir nur den Druck mit der gültigen Höhenformel zur aktuellen Höhe um und senden sie an die Bodenstation. Zusätzlich dazu werden wir die Fallgeschwindigkeit ermitteln - ebenfalls mit einer Formel. Diese kann man aus dem Programm für den Drucksensor entnehmen.
+Wir erhalten also in unserem gewählten Zeitabstand die Daten zu: Temperatur außen und Temperatur innen in °C, Druck in hPa, daraus die Höhe in m und die Fallgeschwindigkeit in m/s.
+Der Grund zur Messung dieser Daten ist die Feststellung der Veränderung je nach Höhe. Wir messen nicht nur die Temperatur außen, sondern auch innen, um entweder die Isolation der Außenhülle festzustellen oder die Luftzufuhr im CanSat, die benötigt wird um mit dem Staubsensor verwertbare Ergebnisse zu erhalten. Zweiteres liegt bei uns im Vordergrund. Die Fallgeschwindigkeit von 15 m/s wurde von der Wettbewerbsleitung vorgegeben. Durch unsere Ermittlung dieser können wir entnehmen, ob wir diese Bedingung mit unsrem Fallschirm erfüllen konnten. 
+Zur Gewährleistung der Funktionstüchtigkeit der Sensoren haben wir mehrere Tests durchgeführt. Das Ergebnis war, dass fast alle nach neuesten Tests positive und nachvollziehbare Messergebnisse je nach Umweltveränderung zeigten.
+
+
+4.2	Software
+
+4.3	Dafür benutzte Sensoren bzw. Geräte
+
+
+NO	Sensor	Bauteilbezeichnung	Energie
+pM1	Temperaturmessung im CanSat	NTC
+LE100E3103JB	10 mA
+pM2	Temperaturmessung außerhalb des CanSat	LM35DZ	NTC: Variable, da Widerstand
+pM3	Drucksensor	MPX4115	0.2 to 4.8 V Output
+
+
+BESCHREIBUNG
+
+Wir verwenden eine Platine für die Komponenten der Primärmission und auch der Bergungsmission. Demzufolge befindet sich darauf der NTC, der LM35DZ, der MPX4115 und das GPS-Modul, sowie der Pieper. Zur Messung der Temperatur innen verwenden wir den LM35DZ und zur Messung außen wurde der NTC durch ein langes Kabel nach draußen verlegt. Der Drucksensor wurde umgeklappt und befindet sich demnach auch innen. 
+ 
+
+
+4.4	Ergebnisse
+
+Die Komponenten für die Primärmission wurden getestet und ihre Programmierung fertig gestellt. Wir können größtenteils sicher gehen, dass sie funktionieren und realistische Werte liefern. 
+Zum Einen testeten wir die Sensoren durch das Legen des CanSat in einen Kühlschrank. Zum Anderen legten wir ihn in eine Vakuumkammer, wodurch wir belegten, dass der Drucksensor funktioniert und die Komponenten selbst niedrigsten Druck aushalten. 
+Besonders wichtig war jedoch auch, zu wissen, ob die Programmierung auch funktioniert. 
+
+4.4.1	Temperatursensor
+
+Messung im Kühlschrank:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dieses Diagramm zeigt die Temperatur- und Druckveränderung nach vergangener Zeit. Die Temperatur wird in °C, der Druck in hPa und die Zeit in s angegeben. Das Augenmerk liegt hierbei auf dem Temperatursensor, da wir den CanSat in einen Kühlschrank gelegt haben. Wir erkennen hier ein deutliches Sinken der Temperatur zwischen 0 und 1700 s von ca. 30 auf 16°C. Bei circa 1000 s ereignet sich ein positiver Ausschlag der Temperatur- hier wurde der Kühlschrank geöffnet und es strömte warme Luft hinein. Nach 1700 s wurde der CanSat wieder aus dem Kühlschrank genommen, nun steigt die Temperatur rapide an.
+Daraus schlussfolgern wir zum Einen, dass beide Temperatur-Sensoren realistische Werte anzeigen und Funktionieren, jedoch zum Anderen mehr Zeit benötigen um zu erkalten. Also werden die Änderungen ins Negative langsamer und mit kleinerer Änderungsrate gemessen als die Änderungen ins Positive. In Relation zur Höhe in der sich der CanSat befindet, haben wir demnach keine realistischen Werte, da der Sensor zu lange braucht um die Temperaturunterschiede wahrzunehmen.
+
+4.4.2	Drucksensor
+
+Messung in der Vakuumglocke:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bei diesem Test haben wir den Drucksensor in eine Vakuumglocke gelegt, den Druck darin verringert und währenddessen die Daten gesammelt. Der blaue Graph zeigt den Druck in hPa an. Man kann sehen, dass dich der Druck am Anfang im normalen Bereich befindet. Nach knapp zwei Minuten fällt der Druck schlagartig ab, in dieser Zeit haben wir die Luft aus der Glocke abgepumpt und dann mit einem Mal wieder rein gelassen, was man an dem plötzlichen Anstieg des Graphen erkennen kann. Das haben wir einmal wiederholt. Im Programm (siehe oben) haben wir die Rechnung eingebracht, dass der Sensor durch den gemessenen Druck die Höhe ausrechnet und mit angibt. Die Höhe in m, in Abhängigkeit vom Druck, wird durch dem grünen Graphen dargestellt. Je niedriger der Druck, desto höher befindet sich der CanSat.
+Hierdurch haben wir festgestellt, dass der Drucksensor gut die Veränderung des Druckes wahrnehmen kann und realistische Werte liefert. Ebenfalls ist die Höhenformel richtig und lässt sich auch anwenden. In diesem Versuch haben wir auch die Fallgeschwindigkeit gemessen, die ebenfalls realistisch war. Der zweite Teil der Primärmission ist also auch funktionstüchtig. 
+
+5.	Sekundäre Mission
+5.1	Missionsziele
+
+Die Feinstaubkonzentration in der Luft stellt heute neben der Ozonbelastung, Stickstoffdioxidbelastung eine Bedrohung für die Bronchialsysteme dar. Besonders durch Emissionen aus Kraftfahrzeugen, Kraft- und Fernheizwerken, Öfen und Heizungen in Wohnhäusern oder auch durch Bodenerosionen gelangt Feinstaub in die Luft. Das Bundesumweltamt definierte zur Gewährleistung gesundheitsunschädlicher Luft besondere Richtlinien, die je nach Staubart in Städten eingehalten werden müssen. Ist dies nicht der Fall, müssen bestimmte Maßnahmen getroffen werden. Da Bremen eine durch Gewerbe und Industrie geprägte Stadt ist und eine ausgebaute Infrastruktur besitzt, muss die Luftqualität regelmäßig überprüft werden.
+ Ziel unserer Sekundärmission ist die Messung der Staubkonzentration in Abhängigkeit von der Flugrichtung und Flughöhe. Um die Daten einer bestimmten Region zuzuordnen z.B Wald, Industriegebiet, Autobahn, werden Fotoaufnahmen  gemacht. Um die aktuellen Messpunkte noch weiter zu belegen, werden auch die Lagedaten des Satelliten über GPS erfasst. 
+
+Der Staubsensor wird uns Daten in g/m³ senden, die wir im Endeffekt in einem Höhe-Staubkonzentration-Diagramm auswerten und mit aktuellen Daten vergleichen können. Währenddessen nimmt die Kamera Bilder auf und speichert sie auf einer SD-Karte im JPEGTrigger. Wenn der CanSat auf dem Boden gelandet ist, können wir die SD-Karte entnehmen und die Fotos erhalten. 
+
+
+5.2	Software
+
+
+5.3	Dafür benutzte Sensoren bzw. Geräte
+
+
+NO	Sensor	Bauteilbezeichnung	Energie
+sM1	Staubmessung 	Sharp GP2Y1010AU0F	mAX. 20 mA
+sM2	Kamera 	LinkSprite JPEG Color Kamera (seriell)	10-100 mA
+sM2a	Speichermöglichkeit der Bilder	JPEG Trigger	3,3-5V 
+sM3	GPS	GTP A013	25 mA
+Energieversorgung	Akku	Lithium Polymer	400 mAh
+
+BESCHREIBUNG
+
+
+5.4	Bisher funktionierende Software und erste durch die Messergebnisse erstellten Diagramme und aufgenommene Bilder für:
+5.4.1	Staubsensor
+ Zudem mussten wir einen Weg finden, Löcher in die Hülle zu bohren, sodass Luft von außen in den CanSat hinein und wieder herausströmen konnte, damit der Staubsensor die Staubkonzentration seiner Umgebung messen kann. Also haben wir Deckel oben und unten angebracht, die wir jederzeit abnehmen können und an die Sensoren und die Speicherkarte herankommen können. In beide Deckel haben wir die Löcher gebohrt. Jetzt kann die Luft reinströmen und durch den anderen Deckel wieder entweichen.
+
+
+
+
+Diagramm:
+
+
+
+
+
+
+
+Bei diesem Diagramm haben wir den Staubsensor in verschiedene Umgebungen gebracht. Als Erstes haben wir ihn an den Auspuff eines PKWs der mit Benzin angetrieben wird, danach an den Auspuff eines LKWs der mit Diesel angetrieben wird und danach haben wir ihn mit Zigarettenrauch konfrontiert. Die Staubkonzentration, also die Rohdaten die der Sensor liefert, liegt in der Spannweite von 0 - 1024. Die Zeit t wird in Sekunden angegeben.
+In der Zeit t=1744 haben wir den Staubsensor an den Auspuff des PKWs gehalten. An dieser Stelle kann man einen eindeutigen Ausschlag sehen, der Sensor hat also die Staubkonzentration messen können. In den Zeiten t=2714 und t=3018 kann man etwas Ähnliches sehen, mit dem Unterschied, dass der Ausschlag größer ist. Der Sensor hat also auch hier eine Veränderung der Umweltbedingung gemessen. Zu den gemessenen Daten müssen wir sagen, dass der Sensor Partikel erst ab einer bestimmten Größe messen kann. Das heißt, dass kleinere Teilchen von ihm nicht angezeigt werden und so die Daten zum Teil unvollständig sind. 
+
+Aus diesem Test schlussfolgern wir die Funktionsfähigkeit des Staubsensors. Wir können also die Programmierung und den Aufbau verwenden, um realistische Werte zu erhalten. Ebenfalls bemerken wir, dass der Sensor gut auf die sich ändernden Staubkonzentrationen reagiert wodurch wir selbst in der geringen Flugphase Ergebnisse erhalten müssten.
+
+5.4.2	Kamera mit JPEG-Trigger
+
+beschreibung
+5.4.3	Kamera mit JPEG-Trigger
+Die Kamera ist in den Boden der Hülle teilweise mit eingearbeitet. Das Objektiv kann so klarere Bilder mit dem Blick zur Erde machen. Durch die Bilder können wir auch im Nachhinein sehen, wie sehr der CanSat getaumelt hat. Außerdem können wir uns auch ein Bild von unserer Umgebung machen, wie sie in der Ferne aussieht, und uns ein Gesamtbild sowie –urteil machen. 
+Verbunden ist die Kamera mit einem 5 Pin-Kabel mit dem JPEG-Trigger, welcher wiederum abgeschrägt wurde. Beide Komponenten wurden mittels Schaumstoff sicher zusammengeklebt. Der JPEG-Trigger besitzt einen SD-Karten-Platz in den wir eine ??????GB Karte legen
+
+  
+
+
+
+6.	Bergungssystem
+Unser Bergungsystem besteht aus einem knallfarbenen Fallschirm, einem GPS-Modul und einem Pieper. 
+Der Fallschirm dient als Erkennung von Weitem
+
+6.1	Fallschirm
+
+Vorarbeit/Testdose:
+Als Testdose füllten wir eine normale Getränkedose 0,3l mit flüssigem Totzin, bis es 350 g wog. Mit dieser konnten wir dann alle Fallversuche durchführen. Die Fallversuche fanden auf dem FEZ-Dach statt. Wir befestigten eine Schnur an der wir die Dose nach dem Fall wieder nach oben ziehen konnten. Durch diese Versuche konnten wir feststellen, ob der Fallschirm aufgeht und ob wir die vorgeschriebene Fallgeschwindigkeit erreichen.
+
+Größe und Stoff:
+Wir haben uns für einen kreisförmigen Fallschirm entscheiden, der in seiner Mitte ein Loch halt. Sein Schattendurchmesser beträgt 9,0 cm mit Loch und 7,8 cm ohne das Loch. Zum Testen der Fallgeschwindigkeit nahmen wir den Stoff von fertigen Fallschirmen,  den wir zuschnitten und umsäumten, damit dieser nicht ausfranst. Dann haben wir an der Schattenseite mit einem Netzt ausgestattet, um so für Stabilität zu sorgen und um zu verhindern, dass der Satellit durch verheddern von Seilen anfängt zu taumeln.
+
+ 
+Bild: die Probedose nach den ersten Fallversuchen
+ 
+Bild: Fallschirm mit Netz
+ 
+Bild: unsere zwei Fallschirme
+
+6.2	Pieper
+
+Der Pieper soll uns bei der Bergung des CanSats behilflich sein. Es ist ein winziger Lautsprecher, der Pieptöne aussendet. Wir können ihn mit einer beliebigen Melodie ausstatten, die wir im Programm festlegen und gegebenenfalls ändern können.
+Wir haben zum Test dieser Funktion die Titelmelodie von dem Spiel „Super Mario Bros.“  programmiert und damit die Annahme bestätigt. Der Pieper wird bei der Mission entweder einen Piepen in regelmäßigen Abständen erzeugen oder ein SOS in Morsezeichen erzeugen. 
+
+BILD
+6.3	GPS
+
+
+Der GPS-Sender wird im CanSat eingebaut. Er wird ebenfalls bei der Bergung nach der Landung behilflich sein. Seine Aufgabe ist es, möglichst genau die Koordinaten der Position des Satelliten zu ermitteln und an die Bodenstation zu senden. Damit können wir aber nicht nur die Position bestimmen, sondern auch in welcher Höhe sich der Can befindet. Diese Information dient lediglich zum Vergleich mit der Höhe, die wir mit dem Drucksensor ausrechnen, um sicher zu gehen, dass der ausgerechnete Wert im Bereich des Möglichen liegt. Wir werden an der Bodenstation einen Computer haben. Dann können wir unsere aktuelle Position herausfinden und die gesendeten Daten eingeben und finden so heraus, in welche Richtung wir gehen müssen, um den CanSat zu Bergen.
+
+ 		FOTO VON PLATINE NEU, ALSO MIT DER PRIMÄR DRAUF
+
+
+
+ 
+
+Hier sieht man die gesendeten Daten des GPS-Modules. Wir benötigen jedoch nur die Weltzeit (UTC Time), Breitengrade (Latitude), Nord oder Süd (N/S Indicator), Längengrade (Longitude), Süd oder West(E/W Indicator), Satelliten (Satellites Used), Höhe über Normalnull (MSL Altitude) in m, Geoid-Höhe (Geoidal Separation) in m.
+
+Die Daten können wir in Endeffekt betrachten und ermitteln wie wir uns bewegt haben z.B den nördlichsten und südlichsten Punkt zur Betrachtung der horizontalen Bewegung. Außerdem können wir dann die Region feststellen, indem wir die Koordinaten in Google Maps eingeben und  dieses uns anzeigt den Ort anzeigt. 
+
+
+
+
+6.4	Bodenstation
+
+Am Boden werden wir einen Laptop dabei haben, welcher mit Windows 7 arbeitet. Er dient als Datenanzeige, also durch den seriellen Monitor werden uns die gesendeten Daten angezeigt und wir könnenn sie direkt nutzen. Veranschaulicht werden diese in einem Diagramm, das wir mit dem Grafikprogramm „Origin“ bereits vor Ort erstellen können. Somit erhalten wir direkt einen Überblick über die Zustände des Satelliten und seiner Sensoren. Die Empfängerreichweite wird mit Hilfe der Yagi-Antenne verstärkt und wir erhalten die Daten selbst bei großer Entfernung.
+Zur Bergung des Satelliten wird ein weiteres GPS-Modul an die Bodenstation angeschlossen. Mit diesem können wir dann unsere GPS-Daten auslesen und uns in die Richtung des Satelliten bewegen. Es handelt sich hierbei um den gleichen GPS-Sender, wie  der im CanSat.
+
+6.4.1	Yagi-Antenne
+Eine  Yagi-Uda-Antenne ist eine Antenne zum Empfangen und Senden elektromagnetischer Wellen. Da der Empfänger an dem Arduino nicht für die Distanz von 1000 m ausgelegt ist, verwenden wir eine Yagi-Antenne, die für unsere Frequenzen von 432,99 bis 435,06 ausgelegt ist. Allerdings müssen wir darauf achten, die Antenne immer genau auf den CanSat zeigen zu lassen, sonst bekommen wir keine Daten. 
+Wir  verbinden die Antenne mit dem Empfänger durch ein Koaxialkabel aus dem Lager eines Betreuers. Der Empfänger soll in einer Schachtel an der Antenne befestigt sein. Wir wählten dafür eine Dose für Blutdruckmessgeräte. Diese kann man aufklappen und kommt somit schnell an den Empfänger heran. Das Verbindungskabel  für den PC  wurde durch die Außenwand gelegt. 
+
+ 
+
+7.	Fertige Software
+
+8.	Problembehandlung
+
+In der Entwicklungsphase des CanSat kamen viele Probleme mit den Sensoren, dem Außenmaterial und der Platzaufteilung auf. Wir haben fehlerhafte Platinen zugeschickt bekommen, waren teilweise wegen der Programmierung einzelner verzweifelt und erlitten soziale Konflikte. Trotz dessen haben wir die Probleme gemeistert, die Sensoren perfektioniert und den CanSat so fertiggestellt. Im folgenden Text werden wir jedes einzelne Problem auflisten und unsere Lösungen dazu aufzählen.
+Als erstes haben wir uns mit dem Temperatursensor beschäftigt. Dadurch, dass wir die Temperatur innerhalb und außerhalb des Satelliten messen, brauchen wir zwei Sensoren: der LM35 und einen NTC. Der LM35 hatte seltsame Werte angegeben, Temperaturen die 400°C überschritten, was auf einen Defekt zurückzuführen war. Wir wissen bis heute nicht woran das lag, konnten aber das Problem lösen, indem wir ihn einfach durch einen neuen Sensor ersetzt haben. Nun bekommen wir realistische Werte. Ein weiteres Problem stellte die Geschwindigkeit des Erfassens der Daten. Die Sensoren brauchen zu viel Zeit um mitzukriegen, dass sich die Temperatur um sie herum ändert. Das stellt ein großes Hindernis dar, denn der Fall dauert nur ein paar Sekunden und wir haben auch nur einen Versuch, und wenn die Sensoren nur eine geringe Änderung anzeigen, können wir kein realistisches Temperaturprofil erstellen. Um dies zu beheben, verwenden wir notfalls ein Modell über die Temperaturschwankungen in Relation zur Höhe. Auch wenn hier andere Einwirkungen wie z.B Winde nicht berücksichtigt werden, kann man es zumindest als Vergleich verwenden.
+  Die Sensoren waren auf einer Platine angelötet, die wir mit dem CanSat-Kit schon fertig bekommen haben. Diese Platine war allerdings fehlerhaft gelötet und wir haben falsche Werte damit gemessen. Also haben wir eine neue Platine dafür hergestellt und sie darauf angebracht. Als erstes waren wir zuversichtlich, dass sie jetzt funktionieren würden, haben aber dann bemerkt, dass wir einen falschen Widerstand angelötet haben. Dieser wurde ausgetauscht. 
+Als nächstes haben wir den Drucksensor in Anspruch genommen. Dieser war ebenfalls im Kit enthalten und auch schon auf der Platine raufgelötet. Ihn haben wir auch auf die selbstgemachte Platine gesetzt. Da er aufrecht steht und so unnötig Platz in die Höhe verbraucht, haben wir ihn umgeklappt und Platz für den Rest geschaffen. Auf der neuen Platine haben wir einen neuen Kondensator für den Sensor eingelötet. Der nun gemessene Luftdruck war permanent 50 hPa unter Normaldruck. Wir vermuteten, dass der Kondensator die Schuld daran  trug. Auch dieser wurde ausgetauscht. Nun bekamen wir richtige Werte und konnten mit dem Drucksensor abschließen.
+Dann nahmen wir den Staubsensor ins Visier. Als er bei uns angekommen ist und wir ihn ausprobieren wollten, bemerkten wir, dass ein bestimmter Stecker fehlte, damit man Kabel anschließen konnte. Das hinderte uns am Weiterarbeiten. Wir haben den Stecker dafür bei einem Elektronikfachhandel erworben und dachten, wir hätten das Problem gelöst.  Natürlich wurde uns trotz Vorzeigen des Anschlusses ein falscher Stecker verkauft. Letztendlich haben wir online doch noch das richtige Model gefunden und konnten die notwendigen Tests durchführen. 
+Ein weiteres Problem stellte die Größe des Sensors dar. Er verbrauchte ungefähr 30% des gesamten Platzes innerhalb des Satelliten. Das konnten wir nur durch die „Verkleinerung“ der anderen Sensoren kompensieren. Der Staubsensor an sich kann nur Partikel ab einer bestimmten Größe messen. Es ist ein relativ altes Model und so nicht fähig für effizienteres Arbeiten. Auch wenn es nicht änderbar ist, bleibt diese Schwierigkeit. Wir können nur bestimmte Korngrößen messen und können daher nicht wissen ob wir Höhenunterschiede feststellen.
+Die Kamera erhält ihre Befehle über den JPEG-Trigger. Sie macht Bilder und speichert sie, allerdings war die Zeitspanne zwischen den Aufnahmen der Bilder zu groß. Sie hat alle 4 Sekunden ein Bild gemacht, doch bei einer Flugzeit von maximal 120 Sekunden ist dies unproduktiv. Lösen können wir das Problem nicht und hinzu kommt, dass nicht ausgeschlossen ist, dass der CanSat viel wackelt, während er hinunter fällt. Dadurch könnten wir eine Mehrheit an verwackelten Bildern erhalten.   
+Beim Kauf des Triggers haben wir einige Erfahrungen mit dem Onlineshop gemacht. Wir haben insgesamt 4 Trigger bestellt, wovon 2 von Anfang an nicht funktioniert haben und einer während der Testzeit den Geist aufgegeben hat. Unser Fehler war, dass wir die Kommentare zu dem Produkt nicht beachtet haben, die alle aussagten, der Trigger weise im Laufe der Zeit einen Kurzschluss auf. Wir haben den Shop darauf angesprochen, er hat uns aber zurückgewiesen.  Letztendlich haben wir einen funktionierenden Trigger rausgesucht. An sich verbrauchte er außerdem zu viel Platz innerhalb des Satelliten. Also haben wir die überschüssigen Verbindungen der Platine abgeschliffen und die Anschlüsse für die Spannung umgelegt. Vorher passte er nur vertikal in den CanSat, jetzt passt er horizontal hinein.
+An dieser Stelle haben wir uns weiter mit dem GPS beschäftigt. Erst wollten wir ein anderes Model als das aktuelle nehmen, ein größeres und schwereres: EM-406A. Bei diesem hatten wir allerdings Probleme mit der Software. Der Sender hat sich schwierig bis fast gar nicht programmieren lassen. Trotzdem haben wir es versucht und sind daran fast verzweifelt. Das andere Modell (GTP A013) war kleiner, leichter und vor allem besser zu programmieren. So haben wir an Platz und an Gewicht des gesamten Satelliten gespart.
+Dann hatten wir noch das Problem mit dem Akku. Erst wollten wir eine normale 5V Batterie nehmen. Aber diese sind sehr groß und somit  unpraktisch. Sie hat ungefähr 1/6 des Platzes innerhalb des Satelliten eingenommen. Letztendlich haben wir uns für zwei 3,7V Akkus entschieden. So sparen wir an Platz und an Gewicht, da diese zu dem leichter sind als die Batterie. Wir müssen nur beide Stromversorgungskabel zusammenführen und an die Platine löten. 
+Durch die neue Regelung, dass die Fallgeschwindigkeit 15 m/s betragen soll, müssen wir den Fallschirm dementsprechend optimieren. Wir haben eine Rechnung zum Berechnen der Schattenfläche. Das Problem dabei war, das wir Anfangs nicht wussten, dass damit die Schattenfläche berechnet wird. Wir haben also eine Weile mit einem zu kleinen Fallschirm die Test durchgeführt. Nun testen wir mit der richtigen Fläche. 
+Der Fallschirmstoff muss die Eigenschaften reißfest, nähbar, stabil besitzen und dem Luftwiderstand standhalten. Wir verwanden dafür alte Fallschirme, die bereits gekauft wurden und passten sie unseren Bedingungen an. Außerdem befestigten wir ein Netz daran, dass dazu dient die vorherigen Schnüre zu ersetzen. Diese haben sich zuvor von dem Fallschirmstoff gelöst und dies bereits nach wenigen Tests mit maximaler Fallhöhe von 20 Meter. Das Netz ist an dem gesamten Umfang des Fallschirm gefestigt und hat sich bei den Tests als optimal herausgestellt. Durch das geringe Gewicht, sollten in diesem Aspekt keine Fehler auftreten.  
+Bei der Yagi-Antenne kamen wenig Schwierigkeiten auf. ????
+Während wir die ganzen Sensoren Programmiert und getestet haben, haben wir parallel nach einem Material für die Hülle des CanSat gesucht. Die Hülle musste stabil sein, mindestens 70Kg aushalten, da während des Falls so viel Gewicht auf die Hülle einwirkt, und sie musste die inneren Geräte vor dem Aufprall so gut es möglich ist schützen. Als erstes kam uns ein Carbon-Rohr in den Sinn, da es die nötige Stabilität besaß und in unseren Augen sich als würdig erwies. Allerdings wäre es bei dem Aufprall höchstwahrscheinlich zersplittert und die Sensoren wären auch kaputt gegangen. Also haben wir uns für eine Hülle aus Plastik entscheiden. Diese ist genauso stabil wie das Carbon-Rohr, mit dem Unterschied, dass es bei dem Aufprall höchstens Risse bekommt, die Sensoren innen aber trotzdem unbeschädigt bleiben. Da die Luftzufuhr gewährleistet sein muss, bohrten wir Löcher in die Deckel oben und unten.  
+Als nächstes kümmerten wir uns um die innere Polsterung. Wir vermuteten, dass die Sensoren während des Aufpralls aufeinander treffen könnten. Wir mussten demzufolge eine innere Polsterung einbauen, damit dies verhindert wird. Dafür verwenden wir Schaumstoff, der zwischen die Komponenten gelegt wird. Zum Beispiel zwischen den Akkus und den Platinen. 
+Das größte Problem war die Platzeinteilung. Wie bereits erwähnt sind viele Komponenten zu groß gewesen, um sie alle einzubauen. Wir haben die Temperatursensoren und den Drucksensor von deren ursprünglichen Platinen abgelötet, eine neue Platine hergestellt und sie zusammen mit dem GPS-Sender darauf wieder angelötet. Außerdem haben wir den Trigger abgeschliffen, sodass wir ihn horizontal einbauen konnten. Hierbei wurden alle kanten abgeschrägt und die Längsseiten gekürzt. Zudem ersetzten wir die große Batterie durch zwei zusammen kleinere Akkus. Diese schieben wir in die vorhandenen Lücken, z.B zwischen dem Sender und dem Mikrokontroller. Zum Schutz vor Kurzschlüssen etc. polstern wir sie durch Schaumstoff. Dieser wird generell nur in Lücken gegeben um zu polstern und zu stabilisieren.  Das Objektiv der Kamera nahm zu viel Platz in die Höhe ein, also haben wir sie in den unteren Deckel eingebaut. Demnach bohrten wir ein abgeschrägtes Loch in den Deckel, in das das Objektiv gesetzt werden kann.
+
+
+
+9.	Öffentlichkeitsarbeit und zukünftige Projekte
+
+
+Um den Wettbewerb auch an andere Schüler und Schülerinnen weiterzuleiten, ist dieser nicht nur im spaceclub_berlin, also auf unserer Internetseite www.spaceclub-berlin.de, vertreten sondern auch im spacecamp 2014 das Hauptthema. Die Campteilnehmer werden selber mit einer Sensebox einen CanSat bauen. Mit einem Wetterballon wird dieser dann auf 50 Meter Höhe gebracht. Währenddessen sammeln sie Daten und zeichnen diese auf. Damit werden sie in der Lage sein, eine kurze Präsentation über die Ergebnisse zu erstellen und sie vor den andern vorzutragen. 
+Einen Pressebeitrag zum geplanten Bau des CanSat  im spaceclub  findet man unter:  http://www.jugendtechnikschule.de/upload/pdf/KONTEXIS_48_2014.pdf
+All unsere Ergebnisse werden am Wochenende des 20. Und 21. Septembers 2014 beim Raumfahrtwochenende im FEZ Berlin vorgestellt. Dabei handelt es sich um eine Veranstaltung rund um das Thema Raumfahrt. Dort vertreten ist nicht nur unser spaceclub  sondern auch das orbitall Berlin und das DLR. Bei dieser Veranstaltung werden wir die CanSats des 1. Spacecamps 2014 einen ganzen Stand widmen und betreuen. So haben die Besucher die Möglichkeit sich über das Thema zu informieren und direkt Fragen zu stellen.
+ Eine weitere besondere Aktion findet zur Landung des Philae-Landers am 11.November 2014 statt. Dieser Lander soll im Rahmen der Rosetta-Mission auf dem Kometen Tschurjumow-Gerasimenko landen und dort mehrere Messungen durchführen.
+Zusätzlich wollen wir bei Jugend-Forscht im Jahr 2015 teilnehmen, da sich dieses Projekt aufgrund des Aufwands und der erlernten Fähigkeiten besonders gut für eine fachliche Arbeit eignet.
+Außerdem wird in Kürze ein Mitglied des spaceclubs, Jasper Morse, eine Reportage über das Projekt drehen. Er wird uns darüber auf Englisch interviewen und das Video auf seinem YouTube Kanal veröffentlichen.
+Die Ermittlung bzw. Kontrolle der Staubkonzentration in der Luft vor allem in Großstädten, wie z. B. Berlin, ist von großer Bedeutung. Zu hohe Staubkonzentrationen belasten die Umwelt und damit auch die Gesundheit der Menschen. Die Messungen werden permanent durchgeführt. In der Labormission des orbitall wird dafür ein Messplatz eingerichtet, an dem Schüler die Möglichkeit haben, aktuelle Messdaten auszuwerten und bewerten zu können. Dafür soll der CanSat permanent über dem Gebäude des orbitall /FEZ Berlin platziert werden (entweder fest oder an einem Ballon).Die gemessenen Daten werden über einen längeren Zeitraum erfasst und mit öffentlich zugänglichen Umweltdaten verglichen. Diese Daten und ihre Auswertung werden 2015 in einer oder zwei Jugend forscht Arbeiten veröffentlicht.
+
+
+www.orbitall.de
+www.spaceclub_berlin.de
+
+
+10.	Reflexion des Wettbewerbes
+
+
+Die Teilnahme an dem Wettbewerb hat uns große Freude und Erfahrung gebracht. Während der Treffen haben wir viel Spaß zusammen und freuen uns, gemeinsam die Herausforderung, selbstständig einen funktionierenden Satelliten zu bauen und zu entwickeln, angenommen zu haben und werden unsere Ergebnisse und Erfahrungen mit anderen teilen.
+
+
+
+
+
+
+Die Legende
+
+T= Team
+Bt= Betreuer
+TA= technische Anforderung
+pM= primäre Mission
+sM= sekundäre Mission
+E= Ergebnis
+B= Bestandteil
+A= Anforderung
+SAT = Satellit 
