@@ -149,7 +149,9 @@ void setup () {  //Voreinstellungen
 
 	//Primärmission
 	float hPa;
-	for (int i = 0; i < 20 ; i++) {			// Schleife, 20 mal
+        int j = 0;
+	for (int i = 0; i < 20 ; i++) { // Schleife, 20 mal
+                j++;			
 		hPa = getPressure(druckPin);
 		if (800 < hPa &&  1500 > hPa){ 
 		//zum Berechnen des 0-Druckes...sollten unwahrscheinliche Werte gemessen werden, 
@@ -158,6 +160,9 @@ void setup () {  //Voreinstellungen
 		} else {
 			i--;
 		} 
+                if (j > 50){
+                  i = 20;
+                }
 	}
 	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
