@@ -26,7 +26,7 @@
 /***********************************************************************************
  * VARIABLEN                                                                       *
  ***********************************************************************************/
-long int letzteSendung = 0;
+unsigned long letzteSendung = 0;
 int Intervall = 1000;    // alle wie viel ms wird eine Messung gemacht und gesendet
 
 //Primärmission (1)
@@ -100,6 +100,7 @@ String floatToString(float number){
 }
 
 String GetGGA() {
+  //Serial.println("ermittle gga");
 	String gps_output = "";
 	boolean GGAready = false;
 	boolean start = false;
@@ -108,6 +109,7 @@ String GetGGA() {
   
 	ermittleGPS = true;
 	while (!GGAready) {
+                Serial.println(millis());
 		if (Serial3.available()) { 
 			inChar = Serial3.read();
 			inByte = int(inChar);
@@ -125,7 +127,9 @@ String GetGGA() {
 					start = true;
 				}
 			}// Ende if (start)
-		}// Ende if (available)
+		} else {
+                  Serial.println("nothing available"); 
+                }// Ende if (available)
 	}// Ende while
 	ermittleGPS = false;
 	return(gps_output); 
@@ -135,17 +139,31 @@ String GetGGA() {
  * SETUP ROUTINE                                                                   *
  ***********************************************************************************/
 void setup () {  //Voreinstellungen
+  pinMode(16, OUTPUT);  // init LED
+  pinMode(17, OUTPUT);  // init LED
+  pinMode(18, OUTPUT);  // init LED
+  pinMode(19, OUTPUT);  // init LED
+  pinMode(20, OUTPUT);  // init LED
+  pinMode(21, OUTPUT);  // init LED
+  pinMode(22, OUTPUT);  // init LED
+  pinMode(23, OUTPUT);  // init LED
+  digitalWrite(16, LOW);   // set LED off
+  digitalWrite(17, LOW);   // set LED off
 	if (debug == 1) {
 		Serial.begin(Bitrate);
 	}
+  digitalWrite(18, LOW);   // set LED off
 	Serial1.begin(Bitrate); 	// Initialisiere das Sendmodul (19200 bits per second):
 
 	Serial3.begin(9600);  					// init GPS an Serial2
 	// Serial3.println("$PMTK220,100*2F"); // 10 Hz, ging gut mit Arduino, mit T-Board nicht mehr
 	Serial3.println("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"); // Nur GGA ausgeben
+  digitalWrite(19, LOW);   // set LED off
 
 	pinMode (beepPin,OUTPUT);				// Piepser zum Laerm machen
 	pinMode (dustLEDPin,OUTPUT);			// LED des Staubsensor
+
+  digitalWrite(20, LOW);   // set LED off
 
 	//Primärmission
 	float hPa;
@@ -164,6 +182,7 @@ void setup () {  //Voreinstellungen
                   i = 20;
                 }
 	}
+  digitalWrite(21, LOW);   // set LED off
 	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
 	if (debug == 1) {
@@ -176,7 +195,18 @@ void setup () {  //Voreinstellungen
 		Serial.println (hoehe);
 		Serial.println(header);
 	} // Ende debug
+  digitalWrite(22, LOW);   // set LED off
 	Serial1.println(header);
+  digitalWrite(23, LOW);   // set LED off
+  delay(500);              // wait for a second
+  digitalWrite(16, HIGH);   // set LED off
+  digitalWrite(17, HIGH);   // set LED off
+  digitalWrite(18, HIGH);   // set LED off
+  digitalWrite(19, HIGH);   // set LED off
+  digitalWrite(20, HIGH);   // set LED off
+  digitalWrite(21, HIGH);   // set LED off
+  digitalWrite(22, HIGH);   // set LED off
+  digitalWrite(23, HIGH);   // set LED off
 }
 
 
@@ -193,7 +223,7 @@ void loop () {  //Schleife <3
 		hoehe = calcAltitude(hPa);
 		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
-		
+                		
 		// Steigt die Rakete
 		if (steige==false && hoehe>150){
 			steige = true;
