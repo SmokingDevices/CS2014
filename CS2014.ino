@@ -139,31 +139,31 @@ String GetGGA() {
  * SETUP ROUTINE                                                                   *
  ***********************************************************************************/
 void setup () {  //Voreinstellungen
-  pinMode(16, OUTPUT);  // init LED
-  pinMode(17, OUTPUT);  // init LED
-  pinMode(18, OUTPUT);  // init LED
-  pinMode(19, OUTPUT);  // init LED
-  pinMode(20, OUTPUT);  // init LED
-  pinMode(21, OUTPUT);  // init LED
-  pinMode(22, OUTPUT);  // init LED
-  pinMode(23, OUTPUT);  // init LED
-  digitalWrite(16, LOW);   // set LED off
-  digitalWrite(17, LOW);   // set LED off
+	pinMode(16, OUTPUT);  // init LED Debug beim Einschalten
+	pinMode(17, OUTPUT);  // init LED
+	pinMode(18, OUTPUT);  // init LED
+	pinMode(19, OUTPUT);  // init LED
+	pinMode(20, OUTPUT);  // init LED
+	pinMode(21, OUTPUT);  // init LED
+	pinMode(22, OUTPUT);  // init LED
+	pinMode(23, OUTPUT);  // init LED
+	digitalWrite(16, LOW);   // set LED on
+	digitalWrite(17, LOW);   // set LED on
 	if (debug == 1) {
 		Serial.begin(Bitrate);
 	}
-  digitalWrite(18, LOW);   // set LED off
+	digitalWrite(18, LOW);   // set LED on
 	Serial1.begin(Bitrate); 	// Initialisiere das Sendmodul (19200 bits per second):
 
 	Serial3.begin(9600);  					// init GPS an Serial2
 	// Serial3.println("$PMTK220,100*2F"); // 10 Hz, ging gut mit Arduino, mit T-Board nicht mehr
 	Serial3.println("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"); // Nur GGA ausgeben
-  digitalWrite(19, LOW);   // set LED off
+	digitalWrite(19, LOW);   // set LED on
 
 	pinMode (beepPin,OUTPUT);				// Piepser zum Laerm machen
 	pinMode (dustLEDPin,OUTPUT);			// LED des Staubsensor
 
-  digitalWrite(20, LOW);   // set LED off
+	digitalWrite(20, LOW);   // set LED on
 
 	//Primärmission
 	float hPa;
@@ -182,7 +182,7 @@ void setup () {  //Voreinstellungen
                   i = 20;
                 }
 	}
-  digitalWrite(21, LOW);   // set LED off
+	digitalWrite(21, LOW);   // set LED on
 	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
 	if (debug == 1) {
@@ -195,18 +195,36 @@ void setup () {  //Voreinstellungen
 		Serial.println (hoehe);
 		Serial.println(header);
 	} // Ende debug
-  digitalWrite(22, LOW);   // set LED off
+	digitalWrite(22, LOW);   // set LED on
 	Serial1.println(header);
-  digitalWrite(23, LOW);   // set LED off
-  delay(500);              // wait for a second
-  digitalWrite(16, HIGH);   // set LED off
-  digitalWrite(17, HIGH);   // set LED off
-  digitalWrite(18, HIGH);   // set LED off
-  digitalWrite(19, HIGH);   // set LED off
-  digitalWrite(20, HIGH);   // set LED off
-  digitalWrite(21, HIGH);   // set LED off
-  digitalWrite(22, HIGH);   // set LED off
-  digitalWrite(23, HIGH);   // set LED off
+	digitalWrite(23, LOW);   // set LED on
+	delay(500);              // warten fuer eine halbe Sekunde
+	digitalWrite(16, HIGH);   // set LED off
+	digitalWrite(17, HIGH);   // set LED off
+	digitalWrite(18, HIGH);   // set LED off
+	digitalWrite(19, HIGH);   // set LED off
+	digitalWrite(20, HIGH);   // set LED off
+	digitalWrite(21, HIGH);   // set LED off
+	digitalWrite(22, HIGH);   // set LED off
+	digitalWrite(23, HIGH);   // set LED off
+	delay(500);              // warten fuer eine halbe Sekunde
+	digitalWrite(16, LOW);   // set LED on
+	digitalWrite(17, LOW);   // set LED on
+	digitalWrite(18, LOW);   // set LED on
+	digitalWrite(19, LOW);   // set LED on
+	digitalWrite(20, LOW);   // set LED on
+	digitalWrite(21, LOW);   // set LED on
+	digitalWrite(22, LOW);   // set LED on
+	digitalWrite(23, LOW);   // set LED on
+	delay(500);              // warten fuer eine halbe Sekunde
+	digitalWrite(16, HIGH);   // set LED off
+	digitalWrite(17, HIGH);   // set LED off
+	digitalWrite(18, HIGH);   // set LED off
+	digitalWrite(19, HIGH);   // set LED off
+	digitalWrite(20, HIGH);   // set LED off
+	digitalWrite(21, HIGH);   // set LED off
+	digitalWrite(22, HIGH);   // set LED off
+	digitalWrite(23, HIGH);   // set LED off
 }
 
 
@@ -239,7 +257,7 @@ void loop () {  //Schleife <3
 		output += TRENNER; 
 		output += floatToString(getTemperatureIntern(tempPin));  	// Anzeigen des Temperaturwertes INT  LM35
 		output += TRENNER; 
-		output += floatToString(getTemperatureExtern(tempNTCPin));	//Anzeigen NTC Temperaturwert EXT 
+		output += floatToString(getTemperatureExtern(tempNTCPin));	// Anzeigen NTC Temperaturwert EXT 
 		output += TRENNER; 
 		output += floatToString(hoehe);
 		output += TRENNER; 
@@ -255,8 +273,12 @@ void loop () {  //Schleife <3
 		delayMicroseconds (9680);				// Abklingen, vermutlich nicht nötig
  
 		voltage = dustValue *0.0048875;			// umrechnen der ausgelesenen Daten zu Volt !!! 5/1023!!!
-		// dustDensity = 0.17*voltage-0.1;
-		dustDensity = voltage/5;
+		if (voltage <= 3.5) {
+			dustDensity = voltage /7.5;
+		}
+		else {
+			dustDensity = (voltage-3.5)*2 +0.4;
+		}
 
 		output += TRENNER; 
 		output += (String)(dustValue);			// Darstellen von gemessener Voltzahl
