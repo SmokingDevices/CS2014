@@ -7,11 +7,11 @@
 
 #define Bitrate 19200
 
-#define druckPin A0
+#define druckPin A6
 #define tempPin A1			// int. Sensor LM35 (3 Beine)
 #define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
 #define beepPin 5			// digitaler D-Pin 5 für Beeper
-#define dustPin A8			// angeschlossen an Pin A8
+#define dustPin A9			// angeschlossen an Pin A8
 #define dustLEDPin 2		// LED an D-Pin 2 angeschlossen
 
 // LM35 Temp sensor
@@ -78,7 +78,7 @@ float getTemperatureExtern(int pin){
 
 float Bit2Volt(int n){    // Funktion zum Lesen und umwandeln
 	int raw = analogRead(n);  // Messdaten von pin 'n' lesen
-	float volt = (float)raw*5.000/1024;  // Umrechnung für Volt
+	float volt = (float)raw*5.000/1023;  // Umrechnung für Volt
 	return volt;  // zurückgeben der Voltzahl
 }
 
@@ -109,7 +109,7 @@ String GetGGA() {
   
 	ermittleGPS = true;
 	while (!GGAready) {
-                Serial.println(millis());
+               // Serial.println(millis());
 		if (Serial3.available()) { 
 			inChar = Serial3.read();
 			inByte = int(inChar);
@@ -127,9 +127,9 @@ String GetGGA() {
 					start = true;
 				}
 			}// Ende if (start)
-		} else {
+		} /*else {
                   Serial.println("nothing available"); 
-                }// Ende if (available)
+                }// Ende if (available)*/
 	}// Ende while
 	ermittleGPS = false;
 	return(gps_output); 
@@ -198,6 +198,11 @@ void setup () {  //Voreinstellungen
 	digitalWrite(22, LOW);   // set LED on
 	Serial1.println(header);
 	digitalWrite(23, LOW);   // set LED on
+
+		digitalWrite (beepPin, HIGH);
+		delay(100);
+		digitalWrite(beepPin,LOW);
+
 	delay(500);              // warten fuer eine halbe Sekunde
 	digitalWrite(16, HIGH);   // set LED off
 	digitalWrite(17, HIGH);   // set LED off
@@ -288,7 +293,7 @@ void loop () {  //Schleife <3
 		output += floatToString(dustDensity);	// letztendliche Staubkonzentration
 
 		// ********************* GPS *****************************
-		String temp = "";
+/*		String temp = "";
 		if (!ermittleGPS) {
 			temp = GetGGA();
 			if (!temp.equals("")) {
@@ -297,7 +302,7 @@ void loop () {  //Schleife <3
 				output += TRENNER; 
 			}
 		}
-		
+*/		
 		if (debug == 1) {
 			Serial.println(output);
 		}
