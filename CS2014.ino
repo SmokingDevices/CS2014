@@ -62,19 +62,22 @@ String header = "time,Druck,Temp (int),Temp (ext),Hoehe,Fallgeschw.,Staubwert,St
 float getPressure (int pin) {  //Methode für Druck
 	// float volt = Bit2Volt(pin); //liest pin ein 
 	// float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
-	float hPa = (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
-//	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
-	hPa = hPa+23.0; // Sensor Eichung, Fehler laut Datenblatt linear +15
-	return hPa;  // zurueckgeben
+	float hPa=0;
+	for (int i=1;i<=10;i++) { // 10 Werte mitteln
+		hPa += (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
+		//	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
+		hPa += 23.0; // Sensor Eichung, Fehler laut Datenblatt linear +23
+	}
+	return hPa/10.0;  // zurueckgeben
 }
 
 float getTemperatureIntern(int pin){  //LM35 an A1
-	float volt;
-        float result;
-        for (i=1;i<=5;i++){ // 5 Werte mitteln
-			volt = Bit2Volt(pin); //liest pin ein
-			result +=volt*TmpSens;  //umrechnung
-        }
+	float volt=0;
+	float result=0;
+    for (i=1;i<=5;i++){ // 5 Werte mitteln
+		volt = Bit2Volt(pin); //liest pin ein
+		result +=volt*TmpSens;  //umrechnung
+	}
 	return result/5.0;  // zurueckgeben
 }
 
