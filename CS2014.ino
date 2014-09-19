@@ -11,7 +11,7 @@
 #define tempPin A1			// int. Sensor LM35 (3 Beine)
 #define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
 #define beepPin 5			// digitaler D-Pin 5 für Beeper
-#define dustPin A9			// angeschlossen an Pin A8
+#define dustPin A9			// angeschlossen an Pin A9
 #define dustLEDPin 2		// LED an D-Pin 2 angeschlossen
 
 // LM35 Temp sensor
@@ -27,7 +27,8 @@
  * VARIABLEN                                                                       *
  ***********************************************************************************/
 unsigned long letzteSendung = 0;
-int Intervall = 1000;    // alle wie viel ms wird eine Messung gemacht und gesendet
+int Intervall = 1000;	// alle wie viel ms wird eine Messung gemacht und gesendet
+int TimeSinceStart = 0;	// Zeit in Sekunden seit Start des CanSat (Start gleich einschalten)
 
 //Primärmission (1)
 int sensorValue = 0;	// Variable to store the value coming from the sensor
@@ -127,9 +128,7 @@ String GetGGA() {
 					start = true;
 				}
 			}// Ende if (start)
-		} /*else {
-                  Serial.println("nothing available"); 
-                }// Ende if (available)*/
+		} // Ende if (available)
 	}// Ende while
 	ermittleGPS = false;
 	return(gps_output); 
@@ -186,7 +185,7 @@ void setup () {  //Voreinstellungen
 	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
 	if (debug == 1) {
-		//Serial.println ("h:"+hoehe);      // debugging
+		// Serial.println ("h:"+hoehe);      // debugging
 		Serial.print ("hPa:");
 		Serial.println (hPa);
 		Serial.print ("druckDurchschnitt:");
@@ -199,9 +198,10 @@ void setup () {  //Voreinstellungen
 	Serial1.println(header);
 	digitalWrite(23, LOW);   // set LED on
 
-		digitalWrite (beepPin, HIGH);
-		delay(100);
-		digitalWrite(beepPin,LOW);
+	// kurzer Beep beim Einschalten
+	digitalWrite (beepPin, HIGH);
+	delay(100);
+	digitalWrite(beepPin,LOW);
 
 	delay(500);              // warten fuer eine halbe Sekunde
 	digitalWrite(16, HIGH);   // set LED off
@@ -239,6 +239,7 @@ void setup () {  //Voreinstellungen
 void loop () {  //Schleife <3
 	if (millis()-letzteSendung >= Intervall) {  //Sendeintervall = 1s
 		letzteSendung = millis();
+		TimeSinceStart = letzteSendung / 1000;
 		String output = "";  
 
 		// ******************* PRIMÄRMISSION ************************
@@ -247,16 +248,18 @@ void loop () {  //Schleife <3
 		fall = (altehoehe - hoehe) / (Intervall / 1000) ;
 		altehoehe = hoehe;
                 		
-		// Steigt die Rakete
-		if (steige==false && hoehe>150){
-			steige = true;
-		}
-		// Fällt der CanSat, unter 150m soll der Piepser dann anfangen.
-		if (unter150 == false && steige==true && hoehe<150){
-			unter150 = true;
+		if (TimeSinceStart>100) { // Erst nach 100 Sekunden prüfen, so schnell geht da nix
+			// Steigt die Rakete
+			if (steige==false && hoehe>150){
+				steige = true;
+			}
+			// Fällt der CanSat, unter 150m soll der Piepser dann anfangen.
+			if (unter150 == false && steige==true && hoehe<150){
+				unter150 = true;
+			}
 		}
 
-		output += (String)(letzteSendung / 1000);	// Anzeigen des Zeitcodes
+		output += (String)(TimeSinceStart);			// Anzeigen des Zeitcodes
 		output += TRENNER; 
 		output += floatToString(hPa); 				// Anzeigen des Druckwertes
 		output += TRENNER; 
@@ -277,8 +280,8 @@ void loop () {  //Schleife <3
    
 		delayMicroseconds (9680);				// Abklingen, vermutlich nicht nötig
  
-		voltage = dustValue *0.0048875;			// umrechnen der ausgelesenen Daten zu Volt !!! 5/1023!!!
-		if (voltage <= 3.5) {
+		voltage = dustValue *0.0048875;			// umrechnen der ausgelesenen Daten zu Volt
+		if (voltage <= 3.5) {					// nicht Linearität des Sensors beachten
 			dustDensity = voltage /7.5;
 		}
 		else {
