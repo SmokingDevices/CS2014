@@ -30,7 +30,7 @@ void loop()
     letzteSendung = millis();
 
     float pressure = getPressure (analogpin);
-    Serial.print(millis());      
+    Serial.print(letzteSendung/1000);      
     Serial.print(",");      
     Serial.println(floatToString(pressure));   // print the pressure 
   }
