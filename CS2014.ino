@@ -60,8 +60,10 @@ String header = "time,Druck,Temp (int),Temp (ext),Hoehe,Fallgeschw.,Staubwert,St
  ***********************************************************************************/
 //Primärmission (1)
 float getPressure (int pin) {  //Methode für Druck
-	float volt = Bit2Volt(pin); //liest pin ein 
-	float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
+	// float volt = Bit2Volt(pin); //liest pin ein 
+	// float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
+	float hPa = (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
+	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
 	return hPa;  // zurueckgeben
 }
 
