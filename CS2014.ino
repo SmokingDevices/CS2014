@@ -63,14 +63,20 @@ float getPressure (int pin) {  //Methode für Druck
 	// float volt = Bit2Volt(pin); //liest pin ein 
 	// float hPa = 10*(volt/(0.009*Vcc)+(0.095/0.009));  //Umrechnung von V zu Pa und dann zu hPa
 	float hPa = (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
-	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
+//	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
+	hPa = hPa+23; // Sensor Eichung, Fehler laut Datenblatt linear +15
 	return hPa;  // zurueckgeben
 }
 
 float getTemperatureIntern(int pin){  //LM35 an A1
-	float volt = Bit2Volt(pin); //liest pin ein
-	float result =volt*TmpSens;  //umrechnung
-	return result;  // zurueckgeben
+	float volt;
+        float result;
+        for (i=1;i<=5;i++){
+          volt = Bit2Volt(pin); //liest pin ein
+	  result +=volt*TmpSens;  //umrechnung
+        }
+        
+	return result/5.0;  // zurueckgeben
 }
 
 float getTemperatureExtern(int pin){
@@ -186,14 +192,14 @@ void setup () {  //Voreinstellungen
 	digitalWrite(21, LOW);   // set LED on
 	druckDurchschnitt = druckBoden/20;      // Berechnung des Druckdurchschnittes
 	
-	if (debug == 1) {
-		// Serial.println ("h:"+hoehe);      // debugging
-		Serial.print ("hPa:");
-		Serial.println (hPa);
-		Serial.print ("druckDurchschnitt:");
-		Serial.println (druckDurchschnitt);
-		Serial.print ("setup done : ");
-		Serial.println (hoehe);
+	if (debug == 1) { // debugging
+		Serial.print("hPa:");
+		Serial.println(hPa);
+		Serial.print("druckDurchschnitt:");
+		Serial.println(druckDurchschnitt);
+		Serial.print("setup done : ");
+		Serial.print(hoehe);
+		Serial.println("m");
 		Serial.println(header);
 	} // Ende debug
 	digitalWrite(22, LOW);   // set LED on
