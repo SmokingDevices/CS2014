@@ -71,11 +71,10 @@ float getPressure (int pin) {  //Methode für Druck
 float getTemperatureIntern(int pin){  //LM35 an A1
 	float volt;
         float result;
-        for (i=1;i<=5;i++){
-          volt = Bit2Volt(pin); //liest pin ein
-	  result +=volt*TmpSens;  //umrechnung
+        for (i=1;i<=5;i++){ // 5 Werte mitteln
+			volt = Bit2Volt(pin); //liest pin ein
+			result +=volt*TmpSens;  //umrechnung
         }
-        
 	return result/5.0;  // zurueckgeben
 }
 
