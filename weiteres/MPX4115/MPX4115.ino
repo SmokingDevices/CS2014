@@ -13,7 +13,7 @@ float getPressure (int pin) {  //Methode für Druck
   float hPa=0;
   for (int i=1; i<=10; i++) {
     hPa += (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
-    hPa += 23.0;
+    hPa += 17.0;
   }
 //  hPa = hPa/5.0;
   return hPa/10.0;  // zurueckgeben

@@ -66,7 +66,7 @@ float getPressure (int pin) {  //Methode für Druck
 	for (int i=1;i<=10;i++) { // 10 Werte mitteln
 		hPa += (float)(((analogRead(pin)/1024.0)+0.095)/0.0009);
 		//	hPa = hPa+(hPa*0.02); // Sensor Eichung, zeigt immer zu wenig an
-		hPa += 23.0; // Sensor Eichung, Fehler laut Datenblatt linear +23
+		hPa += 17.0; // Sensor Eichung, Fehler laut Datenblatt linear +17
 	}
 	return hPa/10.0;  // zurueckgeben
 }
