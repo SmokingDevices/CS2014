@@ -7,7 +7,7 @@
 
 #define Bitrate 19200
 
-#define druckPin A6
+#define druckPin A0
 #define tempPin A1			// int. Sensor LM35 (3 Beine)
 #define tempNTCPin A2		// ext. Sensor NTC (2 Beine)
 #define beepPin 5			// digitaler D-Pin 5 für Beeper
@@ -306,7 +306,7 @@ void loop () {  //Schleife <3
 		output += floatToString(dustDensity);	// letztendliche Staubkonzentration
 
 		// ********************* GPS *****************************
-/*		String temp = "";
+		String temp = "";
 		if (!ermittleGPS) {
 			temp = GetGGA();
 			if (!temp.equals("")) {
@@ -315,7 +315,7 @@ void loop () {  //Schleife <3
 				output += TRENNER; 
 			}
 		}
-*/		
+		
 		if (debug == 1) {
 			Serial.println(output);
 		}
